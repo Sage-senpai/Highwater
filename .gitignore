@@ -2,6 +2,7 @@ node_modules/
 dist/
 data/raw/
 data/cache/
+data/facilities.json
 .env
 .env.local
 _refs/
