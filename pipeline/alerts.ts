@@ -49,6 +49,7 @@ function main() {
 
   const outboxPath = "data/outbox.json";
   const outbox: unknown[] = existsSync(outboxPath) ? JSON.parse(readFileSync(outboxPath, "utf-8")) : [];
+  const todayAlerts: { facilityId: string; text: string; level: string; capUrl: string }[] = [];
 
   let count = 0;
   for (const [facilityId, status] of Object.entries(latest.facilities)) {
@@ -86,6 +87,13 @@ function main() {
 
     writeFileSync(`web/public/alerts/${facilityId}.xml`, capXml);
 
+    todayAlerts.push({
+      facilityId,
+      text,
+      level,
+      capUrl: `/alerts/${facilityId}.xml`,
+    });
+
     outbox.push({
       facilityId,
       facilityName: facility.name,
@@ -100,7 +108,9 @@ function main() {
   }
 
   writeFileSync(outboxPath, JSON.stringify(outbox, null, 2));
-  console.log(`Generated ${count} alerts (CAP XML plus mock outbox entries).`);
+  mkdirSync("web/public/data", { recursive: true });
+  writeFileSync("web/public/data/alerts-today.json", JSON.stringify(todayAlerts, null, 2));
+  console.log(`Generated ${count} alerts (CAP XML plus mock outbox entries plus web/public/data/alerts-today.json).`);
   if (process.env.SEND_REAL_SMS === "true") {
     console.log("SEND_REAL_SMS=true was set, but no real SMS adapter is wired up in this MVP. Nothing was sent.");
   }

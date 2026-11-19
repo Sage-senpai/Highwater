@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import type { Facility, LatestData } from "../types";
+import type { Facility, LatestData, Level } from "../types";
 import { LEVEL_LABELS } from "../types";
 
-interface AlertRow {
-  facility: Facility;
-  level: "WATCH" | "WARNING" | "SEVERE";
+interface AlertFileRow {
+  facilityId: string;
   text: string;
+  level: Level;
   capUrl: string;
+}
+
+interface AlertRow extends AlertFileRow {
+  facility: Facility;
 }
 
 interface Props {
@@ -16,27 +20,24 @@ interface Props {
 
 export default function AlertsTab({ facilities, latest }: Props) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [rows, setRows] = useState<AlertRow[]>([]);
+  const [rows, setRows] = useState<AlertRow[] | null>(null);
 
   useEffect(() => {
-    if (!latest) return;
-    const result: AlertRow[] = [];
-    for (const f of facilities) {
-      const status = latest.facilities[f.id];
-      if (!status) continue;
-      if (status.level === "WATCH" || status.level === "WARNING" || status.level === "SEVERE") {
-        result.push({
-          facility: f,
-          level: status.level,
-          text: `HighWater: River near ${f.name}, ${f.state} forecast above ${LEVEL_LABELS[status.level].toLowerCase()} level within 7 days. Check access routes and stock.`,
-          capUrl: `/alerts/${f.id}.xml`,
-        });
-      }
-    }
-    setRows(result);
-  }, [facilities, latest]);
+    fetch("/data/alerts-today.json")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data: AlertFileRow[]) => {
+        const facilityById = new Map(facilities.map((f) => [f.id, f]));
+        const result: AlertRow[] = [];
+        for (const row of data) {
+          const facility = facilityById.get(row.facilityId);
+          if (facility) result.push({ ...row, facility });
+        }
+        setRows(result);
+      })
+      .catch(() => setRows([]));
+  }, [facilities]);
 
-  if (!latest) {
+  if (!latest || rows === null) {
     return <p style={{ padding: "16px" }}>No alert data generated yet.</p>;
   }
 
@@ -57,7 +58,7 @@ export default function AlertsTab({ facilities, latest }: Props) {
       <ul style={{ listStyle: "none", padding: 0 }}>
         {rows.map((row) => (
           <li
-            key={row.facility.id}
+            key={row.facilityId}
             style={{ border: "1px solid var(--color-border)", borderRadius: "6px", padding: "12px", marginBottom: "10px" }}
           >
             <p style={{ margin: 0 }}>
@@ -68,10 +69,10 @@ export default function AlertsTab({ facilities, latest }: Props) {
             <button
               onClick={() => {
                 navigator.clipboard?.writeText(row.text).catch(() => undefined);
-                setCopiedId(row.facility.id);
+                setCopiedId(row.facilityId);
               }}
             >
-              {copiedId === row.facility.id ? "Copied" : "Copy message"}
+              {copiedId === row.facilityId ? "Copied" : "Copy message"}
             </button>
             <a href={row.capUrl} style={{ marginLeft: "12px" }}>
               Download CAP XML
