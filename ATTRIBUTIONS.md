@@ -14,6 +14,14 @@ Every third-party dataset, API, library, or cloned repo used in this project, wi
 - icpac-igad/flood_watch_system: orchestration repo, no top-level LICENSE file. Treated as read-only reference, no code copied.
 - CLIMADA-project/climada_python: GPL-3.0. Not added as a dependency, read for framing only.
 
+## Map tiles
+
+- CARTO basemap tiles (light_all raster tiles, a.basemaps.cartocdn.com etc.), free, no key required, attribution shown in the map's attribution control at all times: "CARTO, OpenStreetMap contributors". Used instead of tile.openstreetmap.org per docs/claude.md's instruction not to use that host for a public deployment without checking its usage policy.
+
 ## Libraries
 
-(filled in as they are installed, see package.json for exact pinned versions)
+- React 18.3.1, MIT license.
+- MapLibre GL JS 4.7.1, BSD-3-Clause license.
+- @fontsource/public-sans 5.1.0 (self-hosted Public Sans font), OFL-1.1 license.
+- Vite 6, @vitejs/plugin-react, TypeScript: standard build tooling, see web/package.json for exact pinned versions.
+- Pipeline: tsx, vitest, @turf/turf (MIT), csv-parse (MIT), fast-xml-parser (MIT). See root package.json for exact pinned versions.

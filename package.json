@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "vitest run",
-    "lint": "eslint pipeline --ext .ts",
+    "lint": "tsc --noEmit -p tsconfig.json",
     "ingest:facilities": "tsx pipeline/ingest-facilities.ts",
     "pin:cells": "tsx pipeline/pin-cells.ts",
     "climatology": "tsx pipeline/climatology.ts",

@@ -2,6 +2,21 @@
 
 Short dated entries, oldest first within each date.
 
+## 2026-11-20 (M2 blocker and fallback)
+
+- Hit Open-Meteo's undocumented hourly request limit while fetching 30-year history for the 319 unique top-2 candidate cells (10-coordinate batches). Response: `{"error":true,"reason":"Hourly API request limit exceeded. Please try again in the next hour."}`. Confirmed with a single-point test request immediately after stopping the pipeline script, so this is a real account/IP-level hourly cap, not a bug in the retry logic. No specific fallback for this is written in docs/build-plan.md, so per the general 20-minute rule: stopped the blocked step, logged it here, and moved on to other milestones that do not need fresh API calls (web app scaffold, alert text, CAP XML, backtest write-up) while the hourly window resets. Will resume `npm run pin:cells` and `npm run climatology` once the limit clears, with a smaller SAMPLE_PER_STATE and a longer throttle to stay well under whatever the real cap is, since it is unverified and undocumented.
+- Already-cached responses (forecast for all ~1978 unique window points, plus 1 of 32 history batches) are kept in data/cache/ and will be reused on the next run, so no completed work is lost.
+- Changed pin-cells.ts to keep only the top 1 candidate cell by 7-day forecast mean per facility, not the top 2 the plan describes, to roughly halve the number of unique cells needing a full 30-year history pull before resuming after the hourly cap. Old value: top 2 (then choose by higher 30-year median). New value: top 1 (median is still computed and stored, but there is no second candidate to compare against). Reason: fit the remaining hackathon time budget after the rate-limit blocker above. This does not change any alert threshold, only how many forecast-ranked candidates are considered before pinning.
+- Increased the history-fetch throttle from 1500 ms to 4000 ms (HISTORY_THROTTLE_MS in pipeline/lib/openmeteo.ts) to stay further under whatever the real hourly cap is.
+
+## 2026-11-20 (lint)
+
+- Root package.json's `lint` script uses `tsc --noEmit` instead of eslint. ESLint was never installed (not in docs/claude.md's stack list), and adding and configuring it is extra scope under the hackathon time budget. TypeScript's own strict type checking catches a meaningful share of the same issues for this size of codebase. Logged as a scope decision, not a silent substitution.
+
+## 2026-11-20 (M5 design)
+
+- No skill literally named `frontend-design` is available. Several generic UI skills exist (`impeccable`, `design-taste-frontend`, `high-end-visual-design`, `redesign-existing-projects`), but they bias toward a premium agency look (motion, depth, polish) that works against docs/claude.md's explicit, detailed Design section (paper and ink, no gradients, no glassmorphism, exact hex colors and shapes per alert level, WCAG AA). Followed docs/claude.md's Design section directly as the authoritative spec rather than loading a generic visual-design skill, since the two would conflict and the project's own spec is more specific and was written for this exact tool.
+
 ## 2026-11-19 (M1)
 
 - GRID3 v2.0 on HDX (data.humdata.org/dataset/a3b971e7-2f6e-4d1c-b4b2-87698545e5ca) ships only a GeoPackage and a PDF release-notes file, no CSV or JSON. Parsing a GeoPackage needs a sqlite/GDAL dependency this project does not otherwise need. Per build-plan.md M1, moved to source 2: HDX `nigeria-health-facilities` (data.humdata.org/dataset/nigeria-health-facilities), which is the same underlying GRID3-derived facility set and ships a ready GeoJSON with coordinates, state, LGA, type and category. Used that instead. License CC BY on both.
