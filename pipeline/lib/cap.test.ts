@@ -1,6 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { XMLParser } from "fast-xml-parser";
+import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { buildCapXml } from "./cap.js";
+
+// The real OASIS CAP 1.2 XSD was downloaded to pipeline/cap-v1.2.xsd
+// (docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.xsd) but this
+// environment has no xmllint or other XSD validator available, so full
+// schema validation was not run. Logged in DECISIONS.md. Well-formedness
+// is checked here instead, with XMLValidator.validate, which is stricter
+// than XMLParser.parse alone.
 
 describe("buildCapXml", () => {
   const input = {
@@ -20,6 +27,7 @@ describe("buildCapXml", () => {
 
   it("produces well-formed XML that a parser can read back", () => {
     const xml = buildCapXml(input);
+    expect(XMLValidator.validate(xml)).toBe(true);
     const parser = new XMLParser({ ignoreAttributes: false });
     const parsed = parser.parse(xml);
     expect(parsed.alert.identifier).toBe("highwater-test-001");

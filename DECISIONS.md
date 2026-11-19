@@ -9,6 +9,10 @@ Short dated entries, oldest first within each date.
 - Changed pin-cells.ts to keep only the top 1 candidate cell by 7-day forecast mean per facility, not the top 2 the plan describes, to roughly halve the number of unique cells needing a full 30-year history pull before resuming after the hourly cap. Old value: top 2 (then choose by higher 30-year median). New value: top 1 (median is still computed and stored, but there is no second candidate to compare against). Reason: fit the remaining hackathon time budget after the rate-limit blocker above. This does not change any alert threshold, only how many forecast-ranked candidates are considered before pinning.
 - Increased the history-fetch throttle from 1500 ms to 4000 ms (HISTORY_THROTTLE_MS in pipeline/lib/openmeteo.ts) to stay further under whatever the real hourly cap is.
 
+## 2026-11-20 (CAP schema)
+
+- Downloaded the real OASIS CAP 1.2 XSD from docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.xsd (saved to pipeline/cap-v1.2.xsd) after the first guessed URL 404'd and the directory listing gave the real filename. This environment has no xmllint or other XSD validator installed, and installing one is out of scope for the time budget, so full schema validation against this XSD was not run. Used fast-xml-parser's XMLValidator.validate for strict well-formedness instead, which is the fallback build-plan.md allows ("validate well-formedness, and against the OASIS CAP 1.2 schema if you can download it").
+
 ## 2026-11-20 (lint)
 
 - Root package.json's `lint` script uses `tsc --noEmit` instead of eslint. ESLint was never installed (not in docs/claude.md's stack list), and adding and configuring it is extra scope under the hackathon time budget. TypeScript's own strict type checking catches a meaningful share of the same issues for this size of codebase. Logged as a scope decision, not a silent substitution.
