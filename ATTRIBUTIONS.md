@@ -1,0 +1,18 @@
+# ATTRIBUTIONS
+
+Every third-party dataset, API, library, or cloned repo used in this project, with its license.
+
+## Data and APIs
+
+- Open-Meteo Flood API (GloFAS v4 reanalysis and forecast). https://open-meteo.com/en/docs/flood-api
+  No key required for non-commercial use. Commercial use terms not checked, not needed for this MVP.
+
+## Reference repos (read-only, in _refs/, gitignored, not committed)
+
+- COS-IT-FLOWS/cos-it-flows_app: MIT license.
+- icpac-igad/flood_watch_system: orchestration repo, no top-level LICENSE file. Treated as read-only reference, no code copied.
+- CLIMADA-project/climada_python: GPL-3.0. Not added as a dependency, read for framing only.
+
+## Libraries
+
+(filled in as they are installed, see package.json for exact pinned versions)

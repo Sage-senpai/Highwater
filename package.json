@@ -1,0 +1,31 @@
+{
+  "name": "highwater",
+  "version": "0.1.0",
+  "private": true,
+  "description": "River-flood early warning for Nigerian primary health facilities",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "lint": "eslint pipeline --ext .ts",
+    "ingest:facilities": "tsx pipeline/ingest-facilities.ts",
+    "pin:cells": "tsx pipeline/pin-cells.ts",
+    "climatology": "tsx pipeline/climatology.ts",
+    "refresh": "tsx pipeline/refresh.ts",
+    "replay": "tsx pipeline/replay.ts",
+    "alerts": "tsx pipeline/alerts.ts"
+  },
+  "dependencies": {
+    "@turf/turf": "7.2.0",
+    "csv-parse": "5.6.0",
+    "fast-xml-parser": "4.5.3"
+  },
+  "devDependencies": {
+    "tsx": "4.19.2",
+    "typescript": "5.7.3",
+    "vitest": "2.1.8",
+    "@types/node": "22.10.2"
+  }
+}

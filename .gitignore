@@ -1,0 +1,11 @@
+node_modules/
+dist/
+data/raw/
+data/cache/
+.env
+.env.local
+_refs/
+*.log
+.DS_Store
+web/public/data/*.json
+!web/public/data/.gitkeep
