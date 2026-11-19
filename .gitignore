@@ -9,5 +9,3 @@ _refs/
 *.log
 *.tsbuildinfo
 .DS_Store
-web/public/data/*.json
-!web/public/data/.gitkeep

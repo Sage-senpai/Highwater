@@ -9,6 +9,10 @@ Short dated entries, oldest first within each date.
 - Changed pin-cells.ts to keep only the top 1 candidate cell by 7-day forecast mean per facility, not the top 2 the plan describes, to roughly halve the number of unique cells needing a full 30-year history pull before resuming after the hourly cap. Old value: top 2 (then choose by higher 30-year median). New value: top 1 (median is still computed and stored, but there is no second candidate to compare against). Reason: fit the remaining hackathon time budget after the rate-limit blocker above. This does not change any alert threshold, only how many forecast-ranked candidates are considered before pinning.
 - Increased the history-fetch throttle from 1500 ms to 4000 ms (HISTORY_THROTTLE_MS in pipeline/lib/openmeteo.ts) to stay further under whatever the real hourly cap is.
 
+## 2026-11-20 (committed web data)
+
+- Removed the `.gitignore` rule that excluded `web/public/data/*.json`. Vercel's static build (`vercel.json`'s buildCommand) only runs `npm run build` inside web/, it does not call the pipeline, so if the generated per-state facility files, latest.json, and alerts-today.json were gitignored, a fresh checkout would deploy with no data at all. The GitHub Actions daily cron is what keeps these files fresh and commits them; Vercel then just serves whatever is checked in. These files are small (per-state facility subsets of the pilot, not the full 46,140-row national file), unlike data/facilities.json, which stays gitignored.
+
 ## 2026-11-20 (CAP schema)
 
 - Downloaded the real OASIS CAP 1.2 XSD from docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.xsd (saved to pipeline/cap-v1.2.xsd) after the first guessed URL 404'd and the directory listing gave the real filename. This environment has no xmllint or other XSD validator installed, and installing one is out of scope for the time budget, so full schema validation against this XSD was not run. Used fast-xml-parser's XMLValidator.validate for strict well-formedness instead, which is the fallback build-plan.md allows ("validate well-formedness, and against the OASIS CAP 1.2 schema if you can download it").
