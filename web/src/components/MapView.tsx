@@ -34,6 +34,14 @@ interface Props {
 export default function MapView({ facilities, statusById, onSelect }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MLMap | null>(null);
+  // The map's click handler is registered once, on load, but facilities
+  // and onSelect can change on every render (state filter, data loading).
+  // Keep the latest values in refs so the handler never closes over stale
+  // data instead of re-registering it.
+  const facilitiesRef = useRef(facilities);
+  const onSelectRef = useRef(onSelect);
+  facilitiesRef.current = facilities;
+  onSelectRef.current = onSelect;
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -116,8 +124,8 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
         const feature = e.features?.[0];
         if (!feature) return;
         const facilityId = feature.properties?.id;
-        const facility = facilities.find((f) => f.id === facilityId);
-        if (facility) onSelect(facility);
+        const facility = facilitiesRef.current.find((f) => f.id === facilityId);
+        if (facility) onSelectRef.current(facility);
       });
       for (const layer of clickLayers) {
         map.on("mouseenter", layer, () => {
