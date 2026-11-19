@@ -15,7 +15,8 @@
     "climatology": "tsx pipeline/climatology.ts",
     "refresh": "tsx pipeline/refresh.ts",
     "replay": "tsx pipeline/replay.ts",
-    "alerts": "tsx pipeline/alerts.ts"
+    "alerts": "tsx pipeline/alerts.ts",
+    "build:web-data": "tsx pipeline/build-web-data.ts"
   },
   "dependencies": {
     "@turf/turf": "7.2.0",
