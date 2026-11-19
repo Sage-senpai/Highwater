@@ -1,0 +1,42 @@
+name: Daily refresh
+
+on:
+  schedule:
+    # 03:00 UTC daily. GitHub free-tier minutes: public repos get
+    # unlimited minutes for standard runners; private repos get a
+    # monthly quota. Check the repo's plan before relying on this.
+    - cron: "0 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run refresh
+        run: npm run refresh
+
+      - name: Generate alerts
+        run: npm run alerts
+
+      - name: Build web data
+        run: npm run build:web-data
+
+      - name: Commit updated data
+        run: |
+          git config user.name "highwater-bot"
+          git config user.email "highwater-bot@users.noreply.github.com"
+          git add data/latest.json data/outbox.json web/public/data web/public/alerts
+          git diff --cached --quiet || git commit -m "data(refresh): daily forecast refresh"
+          git push
