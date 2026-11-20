@@ -20,6 +20,13 @@ export default function FacilityPanel({ facility, status, cellData, onClose }: P
         padding: "16px",
         maxHeight: "60vh",
         overflowY: "auto",
+        // Without this, the flex column (App's root) shrinks this panel
+        // down to a sliver to make room for the map's flex:1 box, since
+        // minHeight on the map acts as a hard floor but this panel has
+        // none: flex-shrink:1 (the default) squeezed it to a few pixels
+        // instead of its intended up-to-60vh height, clipping almost all
+        // of its content. flexShrink: 0 keeps its natural size instead.
+        flexShrink: 0,
       }}
     >
       <button onClick={onClose} aria-label="Close facility details" style={{ float: "right" }}>

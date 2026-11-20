@@ -12,6 +12,13 @@ import { buildMarkerIcon } from "../markerIcons";
 // and attribution text logged in ATTRIBUTIONS.md.
 const STYLE: maplibregl.StyleSpecification = {
   version: 8,
+  // Required for the cluster-count layer's text-field below. Without it,
+  // MapLibre throws "use of text-field requires a style glyphs property"
+  // the moment that layer is added, inside its own render loop, which
+  // silently breaks the rest of the map (confirmed live: this is why
+  // markers and even tiles were rendering inconsistently). Free, keyless,
+  // CORS-open glyph CDN, logged in ATTRIBUTIONS.md.
+  glyphs: "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
   sources: {
     esriGray: {
       type: "raster",
@@ -54,6 +61,16 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     mapRef.current = map;
+
+    // MapLibre sizes its canvas once at creation and does not notice a
+    // pure-CSS resize of its container on its own. Opening the facility
+    // panel shrinks this flex box (the panel is a sibling that eats some
+    // of the available height), so without this the canvas kept its old,
+    // taller size and visually spilled over the panel every time. A
+    // ResizeObserver on the container is the standard fix: call
+    // map.resize() whenever the box actually changes size.
+    const resizeObserver = new ResizeObserver(() => map.resize());
+    resizeObserver.observe(containerRef.current);
 
     map.on("load", () => {
       (["NORMAL", "WATCH", "WARNING", "SEVERE", "NO_SIGNAL"] as Level[]).forEach((level) => {
@@ -102,6 +119,7 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
         filter: ["has", "point_count"],
         layout: {
           "text-field": ["get", "point_count_abbreviated"],
+          "text-font": ["Open Sans Regular"],
           "text-size": 12,
         },
         paint: { "text-color": "#F6F4EF" },
@@ -149,6 +167,7 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
     });
 
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapRef.current = null;
     };
