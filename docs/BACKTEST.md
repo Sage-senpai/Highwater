@@ -54,35 +54,36 @@ reason are logged in DECISIONS.md, separately from this file.
 
 ## Result
 
-Real numbers now exist. `npm run replay -- --date 2022-10-01` ran against 86 pinned facilities across 6
-states (Kogi, Niger, Kwara, Nasarawa, Benue, Anambra; see docs/DATA_AUDIT.md for the full coverage table).
-`pipeline/backtest-compare.ts` compared the replay's WATCH-or-higher facilities against the NEMA 2022 LGA
-data by (state, LGA):
+Real numbers now exist, updated as pin coverage grew across this build session.
+`npm run replay -- --date 2022-10-01` ran against 99 pinned facilities across 8 of the 9 candidate
+corridor states (Kogi, Niger, Kwara, Nasarawa, Benue, Anambra, Delta, Bayelsa; only Jigawa still has 0,
+see docs/DATA_AUDIT.md for the full coverage table). `pipeline/backtest-compare.ts` compared the replay's
+WATCH-or-higher facilities against the NEMA 2022 LGA data by (state, LGA):
 
-- Sample size: 49 distinct (state, LGA) pairs with at least one pilot facility.
-- Flagged (WATCH or higher) LGAs in the replay: 18.
-- Hits (flagged and in the NEMA 2022 data): 9. Benue: Katsina-Ala, Kwande. Kogi: Idah. Nasarawa: Toto.
-  Niger: Borgu, Bosso, Katcha, Magama, Shiroro.
+- Sample size: 58 distinct (state, LGA) pairs with at least one pilot facility.
+- Flagged (WATCH or higher) LGAs in the replay: 23.
+- Hits (flagged and in the NEMA 2022 data): 11. Benue: Gboko, Katsina-Ala, Kwande, Logo. Kogi: Idah.
+  Nasarawa: Toto. Niger: Borgu, Bosso, Katcha, Magama, Shiroro.
 - Misses (in the NEMA 2022 data, not flagged): 17. Benue: Ado, Apa, Makurdi, Oturkpo, Vandeikya. Kogi:
   Ijumu. Kwara: Asa, Ilorin West, Kaiama, Oyun. Niger: Agwara, Gurara, Kontagora, Lavun, Mariga, Mashegu,
   Paikoro.
-- False alarms (flagged, not in the NEMA 2022 data): 9. Benue: Tarka. Kogi: Bassa, Ibaji, Kogi, Lokoja,
-  Ofu, Omala. Niger: Edati, Gbako.
+- False alarms (flagged, not in the NEMA 2022 data): 12. Bayelsa: Sagbama. Benue: Tarka. Delta: Isoko
+  South, Ughelli South. Kogi: Bassa, Ibaji, Kogi, Lokoja, Ofu, Omala. Niger: Edati, Gbako.
 
-Read plainly: of the LGAs this pilot could even check, about half the ones NEMA reported as flooded were
-missed, and the flagged set has close to as many false alarms as hits. This is a single replay window
-(2022-10-01 to 2022-10-07) against a 49-LGA sample from a 9-state candidate pool that was itself cut short
-by an API rate limit, not a validated detector. Do not say this model is accurate or validated based on
-this number. The honest summary for the pitch is: it finds some real events, misses others, and the
-false-alarm rate is not low. Reproduce with `npx tsx pipeline/backtest-compare.ts data/replay-2022-10-01.json`
-once `data/raw/nema_2022_lga.csv` exists (from `pipeline/backtest-extract.ts`, see above; gitignored, not
+Read plainly: of the LGAs this pilot could even check, well under half the ones NEMA reported as flooded
+were caught (11 of 28 LGAs that are either a hit or a miss), and the flagged set has about as many false
+alarms as hits. This is a single replay window (2022-10-01 to 2022-10-07) against a 58-LGA sample from a
+9-state candidate pool that was itself built under an API rate limit across several sessions, not a
+validated detector. Do not say this model is accurate or validated based on this number. The honest
+summary for the pitch is: it finds some real events, misses more than it catches, and the false-alarm
+rate is not low. Reproduce with `npx tsx pipeline/backtest-compare.ts data/replay-2022-10-01.json` once
+`data/raw/nema_2022_lga.csv` exists (from `pipeline/backtest-extract.ts`, see above; gitignored, not
 committed, since it is a derived intermediate from a raw download).
 
-Benue's own miss list is large partly because Benue has far more NEMA-reported LGAs (14) than this pilot
-sampled facilities for (its 21 sampled facilities land in fewer than 14 distinct LGAs). Delta, Bayelsa and
-Jigawa still have 0 pilot facilities pinned (see docs/DATA_AUDIT.md), so they contribute nothing to this
-sample in either direction; a larger pilot would very likely change these numbers, probably not for the
-better given the miss rate already seen in the states it does cover.
+Jigawa still has 0 pilot facilities pinned (see docs/DATA_AUDIT.md), so it contributes nothing to this
+sample in either direction. A larger pilot covering it, and sampling more facilities per state than the
+current 25-per-state cap, would very likely change these numbers, probably not for the better given the
+miss rate already seen in the states it does cover.
 
 ## Honest caveats regardless of the result
 

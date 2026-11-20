@@ -85,8 +85,8 @@ full M2 run more than once across several sessions; see DECISIONS.md for the fal
 caching, fail-fast on 429, partial-progress saving, reduced throttle, and a bug fix so a rerun under a
 reordered candidate list no longer silently drops previously-pinned facilities). As a result, the pilot
 that actually got real 30-year climatology and a real pin is still smaller than the 150 to 400 facilities
-the build plan asks for, though it grew across sessions: 86 facilities (84 real plus the 2 spot-check
-points), from 227 sampled candidates (25 per corridor state, plus 2 spot-check points), across 6 of the 9
+the build plan asks for, though it grew across sessions: 99 facilities (97 real plus the 2 spot-check
+points), from 227 sampled candidates (25 per corridor state, plus 2 spot-check points), across 8 of the 9
 candidate corridor states. This is the honest number for this build, not the target number.
 
 Coverage by state, from `data/coverage.json` (2026-11-20), `n` is sampled candidates actually pinned with
@@ -96,12 +96,12 @@ real history, `aboveFloor` is how many of those have a 30-year median at or abov
 |---|---|---|---|
 | Kogi | 25 | 11 | 14.50 |
 | Niger | 25 | 8 | 13.28 |
-| Benue | 21 | 4 | 14.93 |
+| Benue | 25 | 6 | 14.93 |
 | Kwara | 12 | 0 | 8.77 |
+| Delta | 8 | 2 | 14.54 |
 | Anambra | 1 (the Onitsha spot-check) | 1 | 14.29 |
+| Bayelsa | 1 | 1 | 8.87 |
 | Nasarawa | 1 | 1 | 12.75 |
-| Delta | 0 (rate-limited before reaching this state) | - | - |
-| Bayelsa | 0 (rate-limited before reaching this state) | - | - |
 | Jigawa | 0 (rate-limited before reaching this state) | - | - |
 
 The two spot-check points from docs/claude.md were reached and confirmed with real API data once
@@ -115,6 +115,6 @@ pin-cells.ts was changed to queue them first (see DECISIONS.md):
   the 100 m3/s floor: NO_SIGNAL. This matches the acceptance check exactly.
 
 Resuming `npm run pin:cells` later (whenever the hourly quota allows) will pin more facilities, including
-Delta, Bayelsa and Jigawa, without re-spending quota on the 86 already cached, since the cache is keyed
+Jigawa, without re-spending quota on the 99 already cached, since the cache is keyed
 per point, not per batch, and pins.json merges with its own previous contents rather than being
 overwritten by each run.
