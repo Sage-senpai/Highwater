@@ -73,8 +73,21 @@ async function main() {
     levelCounts[levelResult.level] = (levelCounts[levelResult.level] ?? 0) + 1;
   }
 
+  const cellsWithData = [...windowMaxByKey.keys()].length;
+  if (cellsWithData === 0 && uniqueCells.length > 0) {
+    console.error(
+      `No cell data was fetched for this replay window (0 of ${uniqueCells.length} cells), almost certainly the Open-Meteo hourly rate limit, not a real "no signal" result. Not writing an empty-but-successful-looking file.`
+    );
+    process.exitCode = 1;
+    return;
+  }
+
   const output = {
     replay_for_date: date,
+    note:
+      cellsWithData < uniqueCells.length
+        ? `Only ${cellsWithData} of ${uniqueCells.length} pinned cells had data this run (rate limit), so this replay is partial, not a full pilot result.`
+        : undefined,
     replay_window: [startDate, endDate],
     label: "historical replay using reanalysis, not a past forecast",
     model: "GloFAS v4 via Open-Meteo",
