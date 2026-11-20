@@ -54,16 +54,35 @@ reason are logged in DECISIONS.md, separately from this file.
 
 ## Result
 
-Still pending for real. `data/pins.json` and `data/cells.json` now exist with real data for 63
-facilities across 4 states (Kogi, Niger, Kwara, Nasarawa), see docs/DATA_AUDIT.md. But every attempt to
-run `npm run replay -- --date 2022-10-01` for the 2022 window was itself blocked by the same Open-Meteo
-hourly limit (confirmed: the script now fails loudly and refuses to write a file when 0 of the pinned
-cells get data, rather than writing a misleading empty-but-successful-looking replay, see
-pipeline/replay.ts and DECISIONS.md). Benue, Delta, Anambra, Bayelsa and Jigawa, which carry the heavier
-NEMA 2022 LGA counts in the table above, were not reached by the pinning run at all before the quota ran
-out, so even a successful replay today would only cover Kogi, Niger, Kwara and Nasarawa's small sample.
-No hit/miss/false-alarm numbers exist yet. This is the honest state of this milestone, not a result to
-round up.
+Real numbers now exist. `npm run replay -- --date 2022-10-01` ran against 86 pinned facilities across 6
+states (Kogi, Niger, Kwara, Nasarawa, Benue, Anambra; see docs/DATA_AUDIT.md for the full coverage table).
+`pipeline/backtest-compare.ts` compared the replay's WATCH-or-higher facilities against the NEMA 2022 LGA
+data by (state, LGA):
+
+- Sample size: 49 distinct (state, LGA) pairs with at least one pilot facility.
+- Flagged (WATCH or higher) LGAs in the replay: 18.
+- Hits (flagged and in the NEMA 2022 data): 9. Benue: Katsina-Ala, Kwande. Kogi: Idah. Nasarawa: Toto.
+  Niger: Borgu, Bosso, Katcha, Magama, Shiroro.
+- Misses (in the NEMA 2022 data, not flagged): 17. Benue: Ado, Apa, Makurdi, Oturkpo, Vandeikya. Kogi:
+  Ijumu. Kwara: Asa, Ilorin West, Kaiama, Oyun. Niger: Agwara, Gurara, Kontagora, Lavun, Mariga, Mashegu,
+  Paikoro.
+- False alarms (flagged, not in the NEMA 2022 data): 9. Benue: Tarka. Kogi: Bassa, Ibaji, Kogi, Lokoja,
+  Ofu, Omala. Niger: Edati, Gbako.
+
+Read plainly: of the LGAs this pilot could even check, about half the ones NEMA reported as flooded were
+missed, and the flagged set has close to as many false alarms as hits. This is a single replay window
+(2022-10-01 to 2022-10-07) against a 49-LGA sample from a 9-state candidate pool that was itself cut short
+by an API rate limit, not a validated detector. Do not say this model is accurate or validated based on
+this number. The honest summary for the pitch is: it finds some real events, misses others, and the
+false-alarm rate is not low. Reproduce with `npx tsx pipeline/backtest-compare.ts data/replay-2022-10-01.json`
+once `data/raw/nema_2022_lga.csv` exists (from `pipeline/backtest-extract.ts`, see above; gitignored, not
+committed, since it is a derived intermediate from a raw download).
+
+Benue's own miss list is large partly because Benue has far more NEMA-reported LGAs (14) than this pilot
+sampled facilities for (its 21 sampled facilities land in fewer than 14 distinct LGAs). Delta, Bayelsa and
+Jigawa still have 0 pilot facilities pinned (see docs/DATA_AUDIT.md), so they contribute nothing to this
+sample in either direction; a larger pilot would very likely change these numbers, probably not for the
+better given the miss rate already seen in the states it does cover.
 
 ## Honest caveats regardless of the result
 
