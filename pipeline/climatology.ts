@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { fetchHistory } from "./lib/openmeteo.js";
 import { pointKey, type Point } from "./lib/grid.js";
-import { percentile, sortAsc, dropNulls, detectPlateaus } from "./lib/stats.js";
+import { percentile, sortAsc, dropNulls, detectTopPlateau } from "./lib/stats.js";
 
 interface Pin {
   facilityId: string;
@@ -96,19 +96,16 @@ async function main() {
     const reasons: string[] = [];
     if (yearsOfData < 20) reasons.push(`only ${yearsOfData} years of data`);
 
-    const plateau = detectPlateaus(clean);
+    // The Lokoja pattern from docs/claude.md: a run of 3 or more identical
+    // consecutive values where the repeated value itself sits in the top 1
+    // percent. A run of identical low values (e.g. several exact-zero days
+    // in the dry season) is common and not flagged; only a repeated HIGH
+    // value is suspicious.
+    const p99Threshold = percentile(sorted, 99);
+    const plateau = detectTopPlateau(clean, p99Threshold);
     if (plateau.longestRun >= 3) {
-      // Only flag as a plateau concern if it sits in the top 1 percent of
-      // values, per docs/claude.md (the Lokoja pattern).
-      const p99Threshold = percentile(sorted, 99);
-      const plateauValues = clean.filter((v, idx, arr) => {
-        // crude check: value is part of a run >=3 and in top 1 percent
-        return v >= p99Threshold;
-      });
-      if (plateauValues.length > 0) {
-        reasons.push(`repeated-value run of ${plateau.longestRun} near the top 1 percent`);
-        flaggedPlateau++;
-      }
+      reasons.push(`repeated-value run of ${plateau.longestRun} at or above the 99th percentile`);
+      flaggedPlateau++;
     }
 
     if (reasons.length > 0) flaggedLowConfidence++;

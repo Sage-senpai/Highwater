@@ -46,3 +46,30 @@ export function detectPlateaus(values: number[]): { flaggedCount: number; longes
   }
   return { flaggedCount, longestRun };
 }
+
+// Like detectPlateaus, but only counts a run of 3 or more identical
+// consecutive values if the repeated value itself is at or above
+// `threshold` (the cell's own 99th percentile, in practice). This is the
+// actual Lokoja pattern from docs/claude.md: a suspiciously repeated HIGH
+// value, not just any flat stretch (which is common and harmless at low
+// flow, e.g. several exact-zero days in the dry season).
+export function detectTopPlateau(
+  values: number[],
+  threshold: number
+): { flaggedCount: number; longestRun: number } {
+  let flaggedCount = 0;
+  let longestRun = 0;
+  let runStart = 0;
+  for (let i = 1; i <= values.length; i++) {
+    const sameAsPrev = i < values.length && values[i] === values[i - 1];
+    if (!sameAsPrev) {
+      const runLen = i - runStart;
+      if (runLen >= 3 && values[runStart] >= threshold) {
+        flaggedCount += runLen;
+        longestRun = Math.max(longestRun, runLen);
+      }
+      runStart = i;
+    }
+  }
+  return { flaggedCount, longestRun };
+}

@@ -64,34 +64,61 @@ async function fetchWithRetry(url: string, attempt = 1): Promise<Response> {
   return res;
 }
 
+// Caches per INDIVIDUAL point, not per batch. Two calls that request the
+// same point under the same extraParams (same date range or forecast
+// length) hit the same cache file even if they group that point into a
+// differently-ordered or differently-sized batch alongside other points.
+// This matters a lot here: pin-cells.ts and climatology.ts both fetch
+// history for overlapping sets of cells, in different orders, and without
+// this the second script would re-request the exact same data under a
+// different batch key and waste the same tight hourly quota again.
+function pointCachePath(p: Point, extraParams: string): string {
+  return cachePath(`latitude=${p.lat}&longitude=${p.lon}&daily=river_discharge&${extraParams}`);
+}
+
 async function fetchDailyBatch(
   points: Point[],
   extraParams: string,
   throttleMs = THROTTLE_MS
-): Promise<FloodDailyResponse[]> {
-  const lat = points.map((p) => p.lat).join(",");
-  const lon = points.map((p) => p.lon).join(",");
-  const query = `latitude=${lat}&longitude=${lon}&daily=river_discharge&${extraParams}`;
-  const file = cachePath(query);
+): Promise<(FloodDailyResponse | null)[]> {
+  const results: (FloodDailyResponse | null)[] = new Array(points.length).fill(null);
+  const toFetch: { point: Point; index: number }[] = [];
 
-  if (existsSync(file)) {
-    return JSON.parse(readFileSync(file, "utf-8"));
-  }
+  points.forEach((p, i) => {
+    const file = pointCachePath(p, extraParams);
+    if (existsSync(file)) {
+      results[i] = JSON.parse(readFileSync(file, "utf-8"));
+    } else {
+      toFetch.push({ point: p, index: i });
+    }
+  });
+
+  if (toFetch.length === 0) return results;
+
+  const lat = toFetch.map((t) => t.point.lat).join(",");
+  const lon = toFetch.map((t) => t.point.lon).join(",");
+  const query = `latitude=${lat}&longitude=${lon}&daily=river_discharge&${extraParams}`;
 
   await sleep(throttleMs);
   const res = await fetchWithRetry(`${BASE_URL}?${query}`);
   const json = await res.json();
-  const arr = Array.isArray(json) ? json : [json];
-  writeFileSync(file, JSON.stringify(arr));
-  return arr;
+  const arr: FloodDailyResponse[] = Array.isArray(json) ? json : [json];
+
+  arr.forEach((entry, j) => {
+    const { point, index } = toFetch[j];
+    writeFileSync(pointCachePath(point, extraParams), JSON.stringify(entry));
+    results[index] = entry;
+  });
+
+  return results;
 }
 
 // Fetches a short forecast (default 7 days) for many points, in chunks.
 export async function fetchForecast(
   points: Point[],
   forecastDays = 7
-): Promise<FloodDailyResponse[]> {
-  const out: FloodDailyResponse[] = [];
+): Promise<(FloodDailyResponse | null)[]> {
+  const out: (FloodDailyResponse | null)[] = [];
   for (let i = 0; i < points.length; i += FORECAST_CHUNK_SIZE) {
     const chunk = points.slice(i, i + FORECAST_CHUNK_SIZE);
     const batch = await fetchDailyBatch(chunk, `forecast_days=${forecastDays}`);

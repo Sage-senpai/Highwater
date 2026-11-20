@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { percentile, median, detectPlateaus, sortAsc } from "./stats.js";
+import { percentile, median, detectPlateaus, detectTopPlateau, sortAsc } from "./stats.js";
 
 describe("percentile", () => {
   it("matches a hand-computed array", () => {
@@ -35,5 +35,24 @@ describe("detectPlateaus", () => {
     const result = detectPlateaus(vals);
     expect(result.flaggedCount).toBe(5);
     expect(result.longestRun).toBe(5);
+  });
+});
+
+describe("detectTopPlateau", () => {
+  it("does not flag a low-value plateau (common dry-season zeros)", () => {
+    const vals = [0, 0, 0, 0, 100, 200, 300];
+    expect(detectTopPlateau(vals, 150).flaggedCount).toBe(0);
+  });
+
+  it("flags a repeated run only when the repeated value is at or above the threshold (the Lokoja pattern)", () => {
+    const vals = [10, 20, 30, 15957.79, 15957.79, 15957.79, 40, 50];
+    const result = detectTopPlateau(vals, 1000);
+    expect(result.flaggedCount).toBe(3);
+    expect(result.longestRun).toBe(3);
+  });
+
+  it("does not flag a run of 2, even above the threshold", () => {
+    const vals = [10, 20, 9000, 9000, 30];
+    expect(detectTopPlateau(vals, 1000).flaggedCount).toBe(0);
   });
 });
