@@ -4,6 +4,12 @@ Written ahead of the demo. Numbers here must trace to a file in this repo or a U
 appendix A. If data/latest.json or a replay file is not yet generated when this is read, say so rather
 than inventing a number.
 
+Current real coverage (data/pins.json, data/coverage.json, 2026-11-20): 63 facilities with a real pinned
+cell and 30-year climatology, across 4 states (Kogi, Niger, Kwara, Nasarawa), not the full 150 to 400
+facility pilot the build plan targets. Open-Meteo's undocumented hourly request limit blocked reaching
+Benue, Delta, Anambra, Bayelsa and Jigawa; see docs/DATA_AUDIT.md. Say this limit out loud in the demo if
+asked how many facilities are covered. Do not say "150 to 400" or imply full coverage.
+
 ## 3-minute script
 
 0:00 to 0:30, the problem.
