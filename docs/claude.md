@@ -108,6 +108,7 @@ Pin the cell once per facility (highest 30-year median in the search window) and
 8. Never touch files outside this repo folder.
 9. If a session ends, the next one starts by reading PROGRESS.md, DECISIONS.md and `git log --oneline -20`.
 10. Ask the owner (write it at the top of PROGRESS.md under NEEDS OWNER) for: `vercel login`, SMS keys, the hackathon rules check, and anything legal.
+    Update, 2026-11-20: the owner confirmed in chat that reusing other open-source repos/code for this hackathon is fine, resolving the hackathon-rules-check item (see PROGRESS.md NEEDS OWNER). This does not change the license rules in "Reference repos" above or the ATTRIBUTIONS.md requirement.
 
 ## Commits
 

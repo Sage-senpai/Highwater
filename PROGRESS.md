@@ -37,7 +37,7 @@ Newest entry first.
 
 ## NEEDS OWNER
 
-- Hackathon rules on open-source reuse: the flyer states none, but the owner should confirm this directly before the pitch. Not blocking build work.
+- RESOLVED 2026-11-20: hackathon rules on open-source reuse. The owner confirmed directly in chat that reusing other open-source repos/code for this hackathon is fine. This does not relax license rules: GPL-3.0 (CLIMADA) is still not added as a dependency per the existing plan, every reused thing is still logged in ATTRIBUTIONS.md with its license, and reading for ideas is still preferred over wholesale copying unless something genuinely drops in cleanly, per docs/claude.md's reference-repo rules.
 - `vercel login`: needed at M9 for the live deploy. Not blocking M0 to M8.
 - Any SMS provider sandbox keys: optional, stretch only. Mock adapter is the default and needs no keys.
 
