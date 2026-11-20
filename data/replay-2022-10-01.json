@@ -1,0 +1,871 @@
+{
+  "replay_for_date": "2022-10-01",
+  "replay_window": [
+    "2022-10-01",
+    "2022-10-07"
+  ],
+  "label": "historical replay using reanalysis, not a past forecast",
+  "model": "GloFAS v4 via Open-Meteo",
+  "facilities": {
+    "612": {
+      "cell": {
+        "lat": 8.325005,
+        "lon": 6.725006
+      },
+      "distance_km": 13.37,
+      "windowMax": 263.85,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "1005": {
+      "cell": {
+        "lat": 9.525002,
+        "lon": 6.425003
+      },
+      "distance_km": 16.62,
+      "windowMax": 19.09,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "1017": {
+      "cell": {
+        "lat": 8.525002,
+        "lon": 4.575012
+      },
+      "distance_km": 5.98,
+      "windowMax": 19.04,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "1114": {
+      "cell": {
+        "lat": 7.5250015,
+        "lon": 8.575012
+      },
+      "distance_km": 16.65,
+      "windowMax": 5.79,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "4727": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 8.075012
+      },
+      "distance_km": 5.58,
+      "windowMax": 13.49,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "5681": {
+      "cell": {
+        "lat": 7.0250015,
+        "lon": 9.175003
+      },
+      "distance_km": 17.92,
+      "windowMax": 22.01,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "7721": {
+      "cell": {
+        "lat": 6.925003,
+        "lon": 6.6250153
+      },
+      "distance_km": 18.13,
+      "windowMax": 29375.49,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "8050": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 9.625015
+      },
+      "distance_km": 4.17,
+      "windowMax": 22.93,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "8578": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 8.625015
+      },
+      "distance_km": 11.97,
+      "windowMax": 115.14,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "9288": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 8.925003
+      },
+      "distance_km": 13.98,
+      "windowMax": 3096.42,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "9402": {
+      "cell": {
+        "lat": 8.025002,
+        "lon": 7.175003
+      },
+      "distance_km": 12.75,
+      "windowMax": 13802.84,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "9450": {
+      "cell": {
+        "lat": 8.325005,
+        "lon": 4.475006
+      },
+      "distance_km": 12.47,
+      "windowMax": 18.82,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "9551": {
+      "cell": {
+        "lat": 6.675003,
+        "lon": 8.125015
+      },
+      "distance_km": 21.06,
+      "windowMax": 4.46,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "9790": {
+      "cell": {
+        "lat": 8.025002,
+        "lon": 5.8750153
+      },
+      "distance_km": 19.43,
+      "windowMax": 4.83,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "10059": {
+      "cell": {
+        "lat": 7.5750046,
+        "lon": 8.925003
+      },
+      "distance_km": 11.85,
+      "windowMax": 3032.89,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "12546": {
+      "cell": {
+        "lat": 6.675003,
+        "lon": 8.225006
+      },
+      "distance_km": 19.05,
+      "windowMax": 268.77,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "12646": {
+      "cell": {
+        "lat": 6.925003,
+        "lon": 8.725006
+      },
+      "distance_km": 7,
+      "windowMax": 22.07,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "14856": {
+      "cell": {
+        "lat": 8.675003,
+        "lon": 6.325012
+      },
+      "distance_km": 11.36,
+      "windowMax": 14420.15,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "17548": {
+      "cell": {
+        "lat": 9.675003,
+        "lon": 6.225006
+      },
+      "distance_km": 7.18,
+      "windowMax": 0.86,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "17662": {
+      "cell": {
+        "lat": 10.075005,
+        "lon": 4.475006
+      },
+      "distance_km": 2.2,
+      "windowMax": 11427.79,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "18588": {
+      "cell": {
+        "lat": 6.675003,
+        "lon": 8.475006
+      },
+      "distance_km": 15.7,
+      "windowMax": 14.38,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "18624": {
+      "cell": {
+        "lat": 9.325005,
+        "lon": 3.8250122
+      },
+      "distance_km": 7.66,
+      "windowMax": 55.89,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "18965": {
+      "cell": {
+        "lat": 7.175003,
+        "lon": 7.225006
+      },
+      "distance_km": 15.17,
+      "windowMax": 24.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "19682": {
+      "cell": {
+        "lat": 7.3250046,
+        "lon": 6.675003
+      },
+      "distance_km": 11.78,
+      "windowMax": 28972.43,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "19756": {
+      "cell": {
+        "lat": 7.925003,
+        "lon": 6.975006
+      },
+      "distance_km": 14.71,
+      "windowMax": 13866.57,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "19818": {
+      "cell": {
+        "lat": 7.925003,
+        "lon": 6.725006
+      },
+      "distance_km": 16.06,
+      "windowMax": 14688.26,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "19882": {
+      "cell": {
+        "lat": 8.025002,
+        "lon": 7.175003
+      },
+      "distance_km": 9.73,
+      "windowMax": 13802.84,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "19891": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 4.8750153
+      },
+      "distance_km": 6.99,
+      "windowMax": 9.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "23901": {
+      "cell": {
+        "lat": 8.325005,
+        "lon": 4.475006
+      },
+      "distance_km": 6.36,
+      "windowMax": 18.82,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "23978": {
+      "cell": {
+        "lat": 7.5250015,
+        "lon": 7.1250153
+      },
+      "distance_km": 14.86,
+      "windowMax": 4.18,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "26658": {
+      "cell": {
+        "lat": 7.175003,
+        "lon": 8.375015
+      },
+      "distance_km": 18.98,
+      "windowMax": 11.91,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "26755": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 8.625015
+      },
+      "distance_km": 13.31,
+      "windowMax": 115.14,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "26851": {
+      "cell": {
+        "lat": 6.925003,
+        "lon": 9.475006
+      },
+      "distance_km": 17.82,
+      "windowMax": 1810.34,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "26947": {
+      "cell": {
+        "lat": 7.3250046,
+        "lon": 9.325012
+      },
+      "distance_km": 19,
+      "windowMax": 2617.18,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "27044": {
+      "cell": {
+        "lat": 6.675003,
+        "lon": 8.225006
+      },
+      "distance_km": 12.74,
+      "windowMax": 268.77,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "27649": {
+      "cell": {
+        "lat": 7.5250015,
+        "lon": 6.225006
+      },
+      "distance_km": 5.87,
+      "windowMax": 1.4,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "27709": {
+      "cell": {
+        "lat": 7.925003,
+        "lon": 6.975006
+      },
+      "distance_km": 11.22,
+      "windowMax": 13866.57,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "27747": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 4.8750153
+      },
+      "distance_km": 8.41,
+      "windowMax": 9.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "28587": {
+      "cell": {
+        "lat": 8.025002,
+        "lon": 6.175003
+      },
+      "distance_km": 12.67,
+      "windowMax": 1.84,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "29401": {
+      "cell": {
+        "lat": 7.8250046,
+        "lon": 8.625015
+      },
+      "distance_km": 9.24,
+      "windowMax": 102.04,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "29494": {
+      "cell": {
+        "lat": 7.5250015,
+        "lon": 7.825012
+      },
+      "distance_km": 19.31,
+      "windowMax": 6.23,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "29963": {
+      "cell": {
+        "lat": 7.925003,
+        "lon": 5.825012
+      },
+      "distance_km": 14.08,
+      "windowMax": 3.97,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30031": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 6.475006
+      },
+      "distance_km": 11,
+      "windowMax": 2.31,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30093": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 6.725006
+      },
+      "distance_km": 18.7,
+      "windowMax": 28706.82,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "30153": {
+      "cell": {
+        "lat": 7.175003,
+        "lon": 6.8750153
+      },
+      "distance_km": 12.74,
+      "windowMax": 20.28,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30215": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 6.6250153
+      },
+      "distance_km": 14.5,
+      "windowMax": 14688.26,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "30278": {
+      "cell": {
+        "lat": 7.3250046,
+        "lon": 7.325012
+      },
+      "distance_km": 18.19,
+      "windowMax": 17.2,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30346": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 4.8750153
+      },
+      "distance_km": 4.48,
+      "windowMax": 9.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "30436": {
+      "cell": {
+        "lat": 7.425003,
+        "lon": 7.225006
+      },
+      "distance_km": 11.7,
+      "windowMax": 25,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30569": {
+      "cell": {
+        "lat": 6.675003,
+        "lon": 6.8750153
+      },
+      "distance_km": 17.91,
+      "windowMax": 194.43,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30640": {
+      "cell": {
+        "lat": 8.325005,
+        "lon": 4.475006
+      },
+      "distance_km": 15.11,
+      "windowMax": 18.82,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30768": {
+      "cell": {
+        "lat": 7.175003,
+        "lon": 8.075012
+      },
+      "distance_km": 15.84,
+      "windowMax": 1.38,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "30869": {
+      "cell": {
+        "lat": 6.925003,
+        "lon": 8.225006
+      },
+      "distance_km": 14.55,
+      "windowMax": 73.82,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "31700": {
+      "cell": {
+        "lat": 8.025002,
+        "lon": 7.3750153
+      },
+      "distance_km": 22.71,
+      "windowMax": 13550.89,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "37352": {
+      "cell": {
+        "lat": 10.575005,
+        "lon": 4.475006
+      },
+      "distance_km": 9.85,
+      "windowMax": 97.17,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38239": {
+      "cell": {
+        "lat": 9.525002,
+        "lon": 6.425003
+      },
+      "distance_km": 17.47,
+      "windowMax": 19.09,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38320": {
+      "cell": {
+        "lat": 9.525002,
+        "lon": 6.425003
+      },
+      "distance_km": 14.34,
+      "windowMax": 19.09,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38400": {
+      "cell": {
+        "lat": 10.425003,
+        "lon": 5.3750153
+      },
+      "distance_km": 17.84,
+      "windowMax": 13.69,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38482": {
+      "cell": {
+        "lat": 9.325005,
+        "lon": 6.975006
+      },
+      "distance_km": 14.28,
+      "windowMax": 140.91,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38562": {
+      "cell": {
+        "lat": 9.425003,
+        "lon": 6.225006
+      },
+      "distance_km": 6.64,
+      "windowMax": 21.34,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38646": {
+      "cell": {
+        "lat": 9.925003,
+        "lon": 6.325012
+      },
+      "distance_km": 16.94,
+      "windowMax": 938.72,
+      "level": "WATCH",
+      "lowConfidence": true
+    },
+    "38727": {
+      "cell": {
+        "lat": 10.025002,
+        "lon": 6.575012
+      },
+      "distance_km": 9.82,
+      "windowMax": 826.94,
+      "level": "WATCH",
+      "lowConfidence": true
+    },
+    "38826": {
+      "cell": {
+        "lat": 9.025002,
+        "lon": 6.075012
+      },
+      "distance_km": 10.89,
+      "windowMax": 41.46,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "38908": {
+      "cell": {
+        "lat": 10.025002,
+        "lon": 4.675003
+      },
+      "distance_km": 13.28,
+      "windowMax": 109.66,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39017": {
+      "cell": {
+        "lat": 8.825005,
+        "lon": 6.1250153
+      },
+      "distance_km": 13.91,
+      "windowMax": 44.19,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39099": {
+      "cell": {
+        "lat": 10.325005,
+        "lon": 5.8750153
+      },
+      "distance_km": 15.95,
+      "windowMax": 13.45,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39182": {
+      "cell": {
+        "lat": 9.325005,
+        "lon": 5.825012
+      },
+      "distance_km": 18.72,
+      "windowMax": 1335.6,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "39262": {
+      "cell": {
+        "lat": 8.925003,
+        "lon": 6.075012
+      },
+      "distance_km": 13.42,
+      "windowMax": 41.46,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39343": {
+      "cell": {
+        "lat": 9.425003,
+        "lon": 7.075012
+      },
+      "distance_km": 10.54,
+      "windowMax": 139.6,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39425": {
+      "cell": {
+        "lat": 9.325005,
+        "lon": 6.075012
+      },
+      "distance_km": 9.42,
+      "windowMax": 21.49,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39507": {
+      "cell": {
+        "lat": 9.325005,
+        "lon": 6.075012
+      },
+      "distance_km": 11.07,
+      "windowMax": 21.49,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "39588": {
+      "cell": {
+        "lat": 9.575005,
+        "lon": 5.8750153
+      },
+      "distance_km": 13.45,
+      "windowMax": 1311.2,
+      "level": "WATCH",
+      "lowConfidence": true
+    },
+    "39682": {
+      "cell": {
+        "lat": 9.525002,
+        "lon": 4.825012
+      },
+      "distance_km": 8.68,
+      "windowMax": 28.65,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "42876": {
+      "cell": {
+        "lat": 7.675003,
+        "lon": 6.675003
+      },
+      "distance_km": 15.44,
+      "windowMax": 28706.82,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "43177": {
+      "cell": {
+        "lat": 7.175003,
+        "lon": 7.825012
+      },
+      "distance_km": 20.25,
+      "windowMax": 8.59,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "43238": {
+      "cell": {
+        "lat": 7.5250015,
+        "lon": 6.225006
+      },
+      "distance_km": 3.91,
+      "windowMax": 1.4,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "43298": {
+      "cell": {
+        "lat": 7.0250015,
+        "lon": 6.6250153
+      },
+      "distance_km": 12.99,
+      "windowMax": 29240.53,
+      "level": "WARNING",
+      "lowConfidence": false
+    },
+    "43423": {
+      "cell": {
+        "lat": 8.525002,
+        "lon": 4.575012
+      },
+      "distance_km": 9.12,
+      "windowMax": 19.04,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "43458": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 4.8750153
+      },
+      "distance_km": 14.24,
+      "windowMax": 9.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "43565": {
+      "cell": {
+        "lat": 8.525002,
+        "lon": 4.575012
+      },
+      "distance_km": 11.76,
+      "windowMax": 19.04,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "43603": {
+      "cell": {
+        "lat": 8.175003,
+        "lon": 4.8750153
+      },
+      "distance_km": 15.83,
+      "windowMax": 9.94,
+      "level": "NO_SIGNAL",
+      "lowConfidence": true
+    },
+    "45802": {
+      "cell": {
+        "lat": 9.825005,
+        "lon": 4.475006
+      },
+      "distance_km": 11.61,
+      "windowMax": 461.38,
+      "level": "WATCH",
+      "lowConfidence": false
+    },
+    "45883": {
+      "cell": {
+        "lat": 10.825005,
+        "lon": 4.675003
+      },
+      "distance_km": 20.92,
+      "windowMax": 10542.86,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "46350": {
+      "cell": {
+        "lat": 7.8250046,
+        "lon": 8.625015
+      },
+      "distance_km": 14.93,
+      "windowMax": 102.04,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    },
+    "spotcheck-onitsha": {
+      "cell": {
+        "lat": 6.0750046,
+        "lon": 6.675003
+      },
+      "distance_km": 14.29,
+      "windowMax": 30477.97,
+      "level": "WARNING",
+      "lowConfidence": true
+    },
+    "spotcheck-nsukka": {
+      "cell": {
+        "lat": 6.925003,
+        "lon": 7.325012
+      },
+      "distance_km": 7.83,
+      "windowMax": 15.22,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false
+    }
+  }
+}
