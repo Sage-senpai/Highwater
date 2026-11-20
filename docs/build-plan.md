@@ -144,6 +144,14 @@ Data and tools
 - CoS-IT-FloWS docs. https://cos-it-flows-documentation.readthedocs.io/en/latest/
 - CLIMADA (GPL-3.0). https://github.com/CLIMADA-project/climada_python
 - ECMWF Code for Earth Africa stream. https://codeforearth.ecmwf.int/stream/africa-stream
+- Open-Meteo Weather Forecast and Historical Archive APIs, used for the experimental heat/cold layer. https://open-meteo.com/en/docs and https://open-meteo.com/en/docs/historical-weather-api
+
+Enugu gully erosion (checked 2026-11-20, added after the host-state question came up in review)
+- Enugu State Ministry of Environment and Mineral Resources, Head of Climate Change Nnamdi Arum: at least eight LGAs affected by erosion, Udenu and Igboeze North named as under serious threat. https://www.environewsnigeria.com/?p=43801
+- Other reporting (not attributed to Arum) names Udi, Eziagu, Uzo Uwani, Nsukka and Igbo Eze as frequently affected by erosion. https://dailytrust.com/south-east-erosion-continues-to-wash-dreams-away/
+- Federal Ministry of Environment flagged Ohaukwu's Ndiulo Amofia Ngbo as high-risk. Same source as above.
+- Enugu State Climate Policy, Climate Action Plan and Climate Education Manual for Schools, launched March 2025. https://nairametrics.com/2025/03/18/enugu-govt-unveils-climate-policy-action-plan-to-tackle-environmental-threats/
+- No free, API-accessible, regularly updated erosion or soil-movement dataset was found in the time available. This is logged as a known gap, not modelled. See docs/PITCH.md question 9.
 
 ## Appendix B: known weaknesses to state openly in the pitch
 

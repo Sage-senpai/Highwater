@@ -112,11 +112,28 @@ as final), a nearest-alternate-facility suggestion, and a real SMS subscription 
    other facility nationwide) using a different method entirely.
 
 8. Why heat and cold, not just flooding?
-   Flooding is not Enugu's main documented climate-health risk; heat and the harmattan cold snap are.
-   Building a flood-only tool would have nothing honest to show at the one place judges can check against
-   their own experience. The heat/cold layer uses Open-Meteo's standard weather forecast and historical
-   archive (temperature and apparent temperature, not GloFAS river discharge), compares each area's 7-day
-   forecast against that same area's own historical 95th percentile (heat) or 5th percentile (cold), and
-   is labelled experimental everywhere it appears: a separate badge, never blended into the river level's
-   NORMAL/WATCH/WARNING/SEVERE colors or claims. It is a smaller, newer piece of this build than the river
-   model and should be presented with that in mind, not as equally proven.
+   River flooding is not Enugu's main documented climate-health risk; heat and the harmattan cold snap are
+   a closer fit, and gully erosion is closer still (see question 9). Building a flood-only tool would have
+   nothing honest to show at the one place judges can check against their own experience. The heat/cold
+   layer uses Open-Meteo's standard weather forecast and historical archive (temperature and apparent
+   temperature, not GloFAS river discharge), compares each area's 7-day forecast against that same area's
+   own historical 95th percentile (heat) or 5th percentile (cold), and is labelled experimental everywhere
+   it appears: a separate badge, never blended into the river level's NORMAL/WATCH/WARNING/SEVERE colors or
+   claims. It is a smaller, newer piece of this build than the river model and should be presented with
+   that in mind, not as equally proven.
+
+9. What about gully erosion? Isn't that Enugu's real climate problem?
+   Yes, and we say so plainly rather than avoid it. Enugu State's own Ministry of Environment and Mineral
+   Resources names erosion as the state's dominant climate hazard: its Head of Climate Change, Nnamdi Arum,
+   is on record that at least eight local government areas are affected, naming Udenu and Igboeze North as
+   under serious threat (environewsnigeria.com, see appendix A). Other reporting, not attributed to Arum,
+   names Udi, Eziagu, Uzo Uwani, Nsukka and Igbo Eze as frequently affected, and the Federal Ministry of
+   Environment has separately flagged Ohaukwu's Ndiulo Amofia Ngbo as high-risk (dailytrust.com). Note that
+   Nsukka appears on this erosion list and, separately, is our own verified NO_SIGNAL river test point: the
+   same place has a real, officially documented climate hazard and zero river signal, which is exactly the
+   gap neither our river model nor our heat/cold layer closes.
+   We do not model erosion. Unlike GloFAS river discharge or Open-Meteo weather, there is no free,
+   API-accessible, regularly updated erosion or soil-movement dataset we found to build a forecast on in
+   the time available, and inventing one would break our own claims policy. We name this honestly as the
+   single biggest unaddressed climate hazard for our host state, not as a future feature we are quietly
+   promising.
