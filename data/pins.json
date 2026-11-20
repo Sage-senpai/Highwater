@@ -384,6 +384,83 @@
     "above_floor": false,
     "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
   },
+  "19946": {
+    "facilityId": "19946",
+    "cell": {
+      "lat": 5.675003,
+      "lon": 6.575012
+    },
+    "distance_km": 16.61,
+    "median_m3s": 3740.11,
+    "above_floor": true,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20090": {
+    "facilityId": "20090",
+    "cell": {
+      "lat": 5.425003,
+      "lon": 5.825012
+    },
+    "distance_km": 13.2,
+    "median_m3s": 22.55,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20128": {
+    "facilityId": "20128",
+    "cell": {
+      "lat": 5.925003,
+      "lon": 5.575012
+    },
+    "distance_km": 11.15,
+    "median_m3s": 112.5,
+    "above_floor": true,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20164": {
+    "facilityId": "20164",
+    "cell": {
+      "lat": 5.5250015,
+      "lon": 6.325012
+    },
+    "distance_km": 9.41,
+    "median_m3s": 37.02,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20200": {
+    "facilityId": "20200",
+    "cell": {
+      "lat": 5.8250046,
+      "lon": 5.725006
+    },
+    "distance_km": 17.8,
+    "median_m3s": 73.3,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20238": {
+    "facilityId": "20238",
+    "cell": {
+      "lat": 6.425003,
+      "lon": 6.6250153
+    },
+    "distance_km": 11.01,
+    "median_m3s": 3613.1,
+    "above_floor": true,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "20274": {
+    "facilityId": "20274",
+    "cell": {
+      "lat": 5.8250046,
+      "lon": 5.725006
+    },
+    "distance_km": 21,
+    "median_m3s": 73.3,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
   "23309": {
     "facilityId": "23309",
     "cell": {
@@ -414,6 +491,72 @@
     },
     "distance_km": 14.86,
     "median_m3s": 0.47,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "24229": {
+    "facilityId": "24229",
+    "cell": {
+      "lat": 5.5250015,
+      "lon": 5.6250153
+    },
+    "distance_km": 15.27,
+    "median_m3s": 35.73,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "24285": {
+    "facilityId": "24285",
+    "cell": {
+      "lat": 5.5250015,
+      "lon": 5.6250153
+    },
+    "distance_km": 14.33,
+    "median_m3s": 35.73,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "24324": {
+    "facilityId": "24324",
+    "cell": {
+      "lat": 5.5250015,
+      "lon": 5.6250153
+    },
+    "distance_km": 15.5,
+    "median_m3s": 35.73,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "25389": {
+    "facilityId": "25389",
+    "cell": {
+      "lat": 6.3250046,
+      "lon": 6.175003
+    },
+    "distance_km": 16.11,
+    "median_m3s": 7.57,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "25429": {
+    "facilityId": "25429",
+    "cell": {
+      "lat": 5.3250046,
+      "lon": 5.575012
+    },
+    "distance_km": 14.53,
+    "median_m3s": 154.6,
+    "above_floor": true,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "25466": {
+    "facilityId": "25466",
+    "cell": {
+      "lat": 6.0250015,
+      "lon": 6.075012
+    },
+    "distance_km": 13.96,
+    "median_m3s": 23.43,
     "above_floor": false,
     "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
   },
@@ -1020,6 +1163,28 @@
     "distance_km": 15.83,
     "median_m3s": 5.12,
     "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "45194": {
+    "facilityId": "45194",
+    "cell": {
+      "lat": 5.5250015,
+      "lon": 5.6250153
+    },
+    "distance_km": 18.21,
+    "median_m3s": 35.73,
+    "above_floor": false,
+    "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
+  },
+  "45304": {
+    "facilityId": "45304",
+    "cell": {
+      "lat": 5.925003,
+      "lon": 5.575012
+    },
+    "distance_km": 8.97,
+    "median_m3s": 112.5,
+    "above_floor": true,
     "method": "window search, top-2 by 7-day forecast mean, pinned by 30-year median"
   },
   "45498": {
