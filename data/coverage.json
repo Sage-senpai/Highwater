@@ -1,8 +1,33 @@
 {
+  "Benue": {
+    "n": 21,
+    "aboveFloor": 4,
+    "medianDistanceKm": 14.93
+  },
+  "Delta": {
+    "n": 0,
+    "aboveFloor": 0,
+    "medianDistanceKm": 0
+  },
+  "Anambra": {
+    "n": 1,
+    "aboveFloor": 1,
+    "medianDistanceKm": 14.29
+  },
+  "Bayelsa": {
+    "n": 0,
+    "aboveFloor": 0,
+    "medianDistanceKm": 0
+  },
+  "Jigawa": {
+    "n": 0,
+    "aboveFloor": 0,
+    "medianDistanceKm": 0
+  },
   "Kogi": {
     "n": 25,
     "aboveFloor": 11,
-    "medianDistanceKm": 14.71
+    "medianDistanceKm": 14.5
   },
   "Niger": {
     "n": 25,
@@ -14,34 +39,9 @@
     "aboveFloor": 0,
     "medianDistanceKm": 8.765
   },
-  "Benue": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
-  },
   "Nasarawa": {
     "n": 1,
     "aboveFloor": 1,
     "medianDistanceKm": 12.75
-  },
-  "Delta": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
-  },
-  "Anambra": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
-  },
-  "Bayelsa": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
-  },
-  "Jigawa": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
   }
 }
