@@ -41,7 +41,16 @@ async function sleep(ms: number) {
 }
 
 async function fetchWithRetry(url: string, attempt = 1): Promise<Response> {
-  const res = await fetch(url);
+  let res: Response;
+  try {
+    res = await fetch(url);
+  } catch (err) {
+    // A network-level failure (DNS, connect timeout) is not a quota
+    // problem, so it is worth a couple of short retries, unlike a 429.
+    if (attempt > 3) throw err;
+    await sleep(2000 * attempt);
+    return fetchWithRetry(url, attempt + 1);
+  }
   if (res.status === 429) {
     // Every retry is itself a request that counts against whatever the
     // real hourly quota is (confirmed: this quota is tight enough that
@@ -114,15 +123,30 @@ async function fetchDailyBatch(
 }
 
 // Fetches a short forecast (default 7 days) for many points, in chunks.
+// Same partial-progress behavior as fetchHistory: a failure (rate limit or
+// network) stops further new requests for the rest of this call but still
+// returns whatever succeeded, padded with nulls, rather than throwing away
+// an entire run over one failed chunk.
 export async function fetchForecast(
   points: Point[],
   forecastDays = 7
 ): Promise<(FloodDailyResponse | null)[]> {
   const out: (FloodDailyResponse | null)[] = [];
+  let hitLimit = false;
   for (let i = 0; i < points.length; i += FORECAST_CHUNK_SIZE) {
     const chunk = points.slice(i, i + FORECAST_CHUNK_SIZE);
-    const batch = await fetchDailyBatch(chunk, `forecast_days=${forecastDays}`);
-    out.push(...batch);
+    if (hitLimit) {
+      out.push(...chunk.map(() => null));
+      continue;
+    }
+    try {
+      const batch = await fetchDailyBatch(chunk, `forecast_days=${forecastDays}`);
+      out.push(...batch);
+    } catch (err) {
+      console.warn(`Forecast chunk ${i / FORECAST_CHUNK_SIZE} failed, stopping further forecast requests this run:`, (err as Error).message);
+      hitLimit = true;
+      out.push(...chunk.map(() => null));
+    }
   }
   return out;
 }
