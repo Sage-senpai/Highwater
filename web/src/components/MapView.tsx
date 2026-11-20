@@ -48,8 +48,21 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
   // data instead of re-registering it.
   const facilitiesRef = useRef(facilities);
   const onSelectRef = useRef(onSelect);
+  const statusByIdRef = useRef(statusById);
   facilitiesRef.current = facilities;
   onSelectRef.current = onSelect;
+  statusByIdRef.current = statusById;
+  // True once the map's one-time "load" event has fired. Checking this
+  // instead of map.isStyleLoaded() matters: that method can transiently
+  // report false well after "load" already fired (while tiles are mid
+  // fetch, in at least this MapLibre version), and both other effects
+  // used to fall back to map.once("load", ...) in that case. Since "load"
+  // only ever fires once, a registration made after it already fired
+  // never runs: the fit or the data update was silently dropped, with no
+  // error, which is why markers and the zoomed-in view only sometimes
+  // showed up. This ref is the single source of truth for "is it safe to
+  // touch sources and layers now", set once inside the real "load" handler.
+  const loadedRef = useRef(false);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -163,20 +176,26 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
         });
       }
 
-      updateSource(map, facilities, statusById);
+      // Use the refs, not the closed-over props: this handler was created
+      // once, on mount, so facilities/statusById here would otherwise be
+      // whatever they were at that first render, not the latest values.
+      updateSource(map, facilitiesRef.current, statusByIdRef.current);
+      if (facilitiesRef.current.length > 0) fitToFacilities(map, facilitiesRef.current);
+      loadedRef.current = true;
     });
 
     return () => {
       resizeObserver.disconnect();
       map.remove();
       mapRef.current = null;
+      loadedRef.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
+    if (!map || !loadedRef.current) return;
     updateSource(map, facilities, statusById);
   }, [facilities, statusById]);
 
@@ -186,10 +205,8 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
   // and neighbouring countries with nothing plotted on it.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || facilities.length === 0) return;
-    const fit = () => fitToFacilities(map, facilities);
-    if (map.isStyleLoaded()) fit();
-    else map.once("load", fit);
+    if (!map || !loadedRef.current || facilities.length === 0) return;
+    fitToFacilities(map, facilities);
   }, [facilities]);
 
   return <div ref={containerRef} style={{ position: "absolute", inset: 0 }} aria-label="Facility map" role="region" />;
