@@ -1,6 +1,6 @@
 # HighWater
 
-A river-level warning for Nigerian primary health facilities near large rivers, built overnight for the
+A river-level warning for Nigerian primary health facilities near large rivers, built for the
 AIESEC x HISA Innovation Hackathon, Climate track (19 to 20 November 2026).
 
 ## What this is
