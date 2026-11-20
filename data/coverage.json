@@ -5,14 +5,14 @@
     "medianDistanceKm": 14.93
   },
   "Delta": {
-    "n": 23,
+    "n": 25,
     "aboveFloor": 7,
-    "medianDistanceKm": 14.53
+    "medianDistanceKm": 14.52
   },
   "Anambra": {
-    "n": 1,
-    "aboveFloor": 1,
-    "medianDistanceKm": 14.29
+    "n": 22,
+    "aboveFloor": 10,
+    "medianDistanceKm": 14.18
   },
   "Bayelsa": {
     "n": 1,
