@@ -52,6 +52,10 @@ cd web && npm install && npm run dev
 
 - River discharge: Open-Meteo Flood API (GloFAS v4), no key required for non-commercial use.
   https://open-meteo.com/en/docs/flood-api
+  Note: this API has a tight, undocumented hourly request limit (discovered the hard way, see
+  DECISIONS.md and docs/DATA_AUDIT.md). The pipeline caches every response per point on disk
+  (`data/cache/`, gitignored) and resumes where it left off across runs, but a full pilot run can take
+  more than one hour of wall-clock time across several attempts.
 - Facility locations: HDX "Nigeria: Health facilities" (GRID3-derived), CC BY. Not validated against a
   site visit. See docs/DATA_AUDIT.md for the full audit.
 - 2022 flood events for the backtest: HDX "Nigeria: Flood data" (NEMA), CC BY. See docs/BACKTEST.md.
