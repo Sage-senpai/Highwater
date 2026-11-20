@@ -69,7 +69,7 @@ as final), a nearest-alternate-facility suggestion, and a real SMS subscription 
 5. Open the Alerts tab, copy a message, show the CAP XML download.
 6. Open "How reliable is this" and read the NO_SIGNAL and 5 km lines out loud.
 
-## Six hard questions
+## Eight hard questions
 
 1. Why not just use NIHSA's dashboard?
    NIHSA already forecasts floods nationally and has a dashboard and a hybrid AI model (Guardian, 2026).
@@ -101,3 +101,22 @@ as final), a nearest-alternate-facility suggestion, and a real SMS subscription 
    generator, the web app. Read for ideas, not copied: icpac-igad/flood_watch_system's CAP handling
    approach, read only. Not cloned or used: cos-it-flows_app (size and time), CLIMADA (GPL-3.0, heavy). Full
    list with licenses in ATTRIBUTIONS.md.
+
+7. What about Enugu itself, where this hackathon is happening?
+   Enugu, including Nsukka, has no large river in this model's sense: our own tests return no usable
+   discharge signal there (docs/claude.md's verified facts, and the Nsukka spot-check in
+   docs/DATA_AUDIT.md pins to NO_SIGNAL with a 30-year median of 3.31 m3/s, far below the 100 m3/s floor).
+   So the river-level warning has nothing to say about Enugu, and we say that plainly rather than forcing
+   a number. That is exactly why the experimental heat/cold layer exists: Enugu sits squarely in Nigeria's
+   harmattan-cold and heat-stress picture even without a major river, and that layer covers it (and every
+   other facility nationwide) using a different method entirely.
+
+8. Why heat and cold, not just flooding?
+   Flooding is not Enugu's main documented climate-health risk; heat and the harmattan cold snap are.
+   Building a flood-only tool would have nothing honest to show at the one place judges can check against
+   their own experience. The heat/cold layer uses Open-Meteo's standard weather forecast and historical
+   archive (temperature and apparent temperature, not GloFAS river discharge), compares each area's 7-day
+   forecast against that same area's own historical 95th percentile (heat) or 5th percentile (cold), and
+   is labelled experimental everywhere it appears: a separate badge, never blended into the river level's
+   NORMAL/WATCH/WARNING/SEVERE colors or claims. It is a smaller, newer piece of this build than the river
+   model and should be presented with that in mind, not as equally proven.
