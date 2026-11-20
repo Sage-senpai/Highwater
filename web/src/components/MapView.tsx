@@ -58,7 +58,15 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
     map.on("load", () => {
       (["NORMAL", "WATCH", "WARNING", "SEVERE", "NO_SIGNAL"] as Level[]).forEach((level) => {
         const canvas = buildMarkerIcon(level);
-        map.addImage(`marker-${level}`, canvas as unknown as HTMLImageElement);
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        // map.addImage only accepts HTMLImageElement, ImageBitmap, ImageData,
+        // or a {width, height, data} object. A raw HTMLCanvasElement is not
+        // one of those: passing it (even via an unsafe cast) used to fail
+        // silently at runtime, with no console error, and no marker ever
+        // rendered. Pulling the pixels out as ImageData fixes it.
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        map.addImage(`marker-${level}`, imageData);
       });
 
       // Two sources: calm levels (NORMAL, NO_SIGNAL) cluster at low zoom;
