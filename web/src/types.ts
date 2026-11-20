@@ -8,6 +8,12 @@ export interface Facility {
   lat: number;
   lon: number;
   type?: string;
+  // Experimental heat/cold layer, a different data source and method
+  // than the river level (see pipeline/heat-cold.ts, docs/PITCH.md).
+  // Present only once that cell has been resolved.
+  heatRiskIn7Days?: boolean;
+  coldRiskIn7Days?: boolean;
+  heatColdLowConfidence?: boolean;
 }
 
 export interface FacilityStatus {

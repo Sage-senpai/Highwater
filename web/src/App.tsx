@@ -9,6 +9,7 @@ import AlertsTab from "./components/AlertsTab";
 import ReliabilityPage from "./components/ReliabilityPage";
 import LandingPage from "./components/LandingPage";
 import { isIntroDismissed, setIntroDismissed } from "./components/landingState";
+import HeatColdBadge from "./components/HeatColdBadge";
 
 type Tab = "map" | "alerts" | "reliability";
 
@@ -149,12 +150,15 @@ export default function App() {
             />
           </div>
           {selectedFacility && (
-            <FacilityPanel
-              facility={selectedFacility}
-              status={selectedStatus}
-              cellData={selectedCellData}
-              onClose={() => setSelectedFacility(null)}
-            />
+            <>
+              <FacilityPanel
+                facility={selectedFacility}
+                status={selectedStatus}
+                cellData={selectedCellData}
+                onClose={() => setSelectedFacility(null)}
+              />
+              <HeatColdBadge facility={selectedFacility} />
+            </>
           )}
         </>
       )}
