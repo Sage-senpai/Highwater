@@ -2,6 +2,20 @@
 
 Newest entry first.
 
+## 2026-11-20 (milestone status, consolidated)
+
+- M0 Setup: DONE. Evidence: first commit, `npx vitest run` passing, npm audit recorded.
+- M1 Facility data audit: DONE. Evidence: docs/DATA_AUDIT.md, 46,140 cleaned facilities, unit tests.
+- M2 River-cell finder: PARTIAL, blocked by Open-Meteo's undocumented hourly request limit, not by anything in this build's logic. 63 of a 150-400 target pinned with real data, across 4 of 9 corridor states. pipeline/pin-cells.ts is correct and tested; reordered to make the next limited run count. Resume with `npm run pin:cells` whenever the quota allows; it picks up from the disk cache with no wasted calls.
+- M3 Climatology: DONE for the 50 cells M2 reached. Evidence: data/cells.json, a real plateau-detection bug found and fixed (see DECISIONS.md), 11 of 50 real cells flagged low-confidence.
+- M4 Forecast, levels, replay: refresh DONE for the 63 pinned facilities (data/latest.json, 43 NO_SIGNAL, 20 NORMAL, 0 WATCH+, matching the expected calm late-November result). Replay NOT DONE: 3 attempts all rate-limited before any cell returned data; replay.ts now refuses to write a misleading empty-success file in that case.
+- M5 Web app skeleton: DONE, with one real gap. Builds and type-checks clean, 270.81 kB gzipped JS (under the 300 KB target), real committed data flows through to web/dist/data/. Gap: no Lighthouse run and no 360px screenshot, since the Claude in Chrome browser tool reports "not connected" in this environment on every attempt.
+- M6 Facility detail and reliability page: PARTIAL. The code exists and the facility-to-cell-to-status lookup was verified correct against real data with a direct check. Not verified: an actual rendered screenshot of three facilities at different levels, for the same browser-tool reason as M5. Only 2 of 5 levels (NO_SIGNAL, NORMAL) exist in today's real data, which is expected for the season, not a bug.
+- M7 Alerts and CAP: DONE. Alert text and CAP generation are implemented and unit-tested (ASCII, 160-char limit, well-formed XML). Ran against real data: 0 alerts generated today, correctly, since there are no WATCH+ facilities.
+- M8 Backtest: PARTIAL. Real 2022 NEMA flood data extracted and documented (840 rows, 32 states). The actual replay-based comparison has no numbers yet, blocked on the same rate limit as M2/M4. docs/BACKTEST.md states this plainly.
+- M9 Deploy, docs, pitch: PARTIAL. README, docs/PITCH.md, .github/workflows/refresh.yml, vercel.json are all written, and PITCH.md's coverage claim was corrected to match the real number. NOT DONE: the actual Vercel deploy (needs `vercel login`, a NEEDS OWNER item) and a final README/PITCH pass once more real coverage exists.
+- M10: not started, correctly, since M9 is not fully done.
+
 ## NEEDS OWNER
 
 - Hackathon rules on open-source reuse: the flyer states none, but the owner should confirm this directly before the pitch. Not blocking build work.
