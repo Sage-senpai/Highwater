@@ -25,4 +25,4 @@ Every third-party dataset, API, library, or cloned repo used in this project, wi
 - MapLibre GL JS 4.7.1, BSD-3-Clause license.
 - @fontsource/public-sans 5.1.0 (self-hosted Public Sans font), OFL-1.1 license.
 - Vite 6, @vitejs/plugin-react, TypeScript: standard build tooling, see web/package.json for exact pinned versions.
-- Pipeline: tsx, vitest, @turf/turf (MIT), csv-parse (MIT), fast-xml-parser (MIT). See root package.json for exact pinned versions.
+- Pipeline: tsx, vitest, fast-xml-parser (MIT). See root package.json for exact pinned versions.

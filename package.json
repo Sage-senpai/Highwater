@@ -19,8 +19,6 @@
     "build:web-data": "tsx pipeline/build-web-data.ts"
   },
   "dependencies": {
-    "@turf/turf": "7.2.0",
-    "csv-parse": "5.6.0",
     "fast-xml-parser": "4.5.3"
   },
   "devDependencies": {

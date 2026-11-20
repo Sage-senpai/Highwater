@@ -9,6 +9,10 @@ Short dated entries, oldest first within each date.
 - Changed pin-cells.ts to keep only the top 1 candidate cell by 7-day forecast mean per facility, not the top 2 the plan describes, to roughly halve the number of unique cells needing a full 30-year history pull before resuming after the hourly cap. Old value: top 2 (then choose by higher 30-year median). New value: top 1 (median is still computed and stored, but there is no second candidate to compare against). Reason: fit the remaining hackathon time budget after the rate-limit blocker above. This does not change any alert threshold, only how many forecast-ranked candidates are considered before pinning.
 - Increased the history-fetch throttle from 1500 ms to 4000 ms (HISTORY_THROTTLE_MS in pipeline/lib/openmeteo.ts) to stay further under whatever the real hourly cap is.
 
+## 2026-11-20 (unused dependencies removed)
+
+- Removed @turf/turf and csv-parse from package.json. Both were in docs/claude.md's suggested stack, but ended up unused: distance is a plain haversine function in pipeline/lib/grid.ts (no turf needed for a single point-to-point distance), and facility ingestion used the HDX GeoJSON resource directly (JSON.parse), not a CSV, since GRID3 v2.0's own CSV had no coordinates (see DATA_AUDIT.md). Keeping unused dependencies around contradicts "keep dependencies few and pinned."
+
 ## 2026-11-20 (web npm audit)
 
 - `npm audit` inside web/ (not run earlier, only the root pipeline's was): 3 vulnerabilities. esbuild (moderate, dev-server only, same class as the root audit). maplibre-gl (critical, XSS sanitizer bypass in DOM.sanitize via a live NamedNodeMap), fix only available in maplibre-gl 6.x (breaking from the pinned 4.7.1). Not upgrading under the hackathon time budget: this app never calls MapLibre's HTML-sanitizing APIs with untrusted input (no popups with user-controlled HTML, facility names are rendered through React text nodes, not through MapLibre's own DOM injection), so the specific bypass does not have a reachable path here. Logged rather than silently left out of the audit record.
