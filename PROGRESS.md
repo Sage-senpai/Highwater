@@ -29,6 +29,12 @@ Newest entry first.
 - `npm test`: 53 tests passing (up from 42: 3 heatgrid tests, 8 heatlevels tests). `npm run lint` clean on both pipeline and web. `npx vite build` still succeeds, 272.99 kB gzipped JS.
 - Noticed this session's repo now has a remote (github.com/Sage-senpai/Highwater) and the coordinator is committing to the same shared working directory in parallel (web app fixes: tile source, landing page, marker rendering bug, glyph crash). Confirmed in sync via `git log` each time before starting pipeline work, and avoided touching the files the coordinator asked not to be touched.
 
+## 2026-11-20 (further river expansion to 114 facilities; heat/cold layer stuck at 40 cells)
+
+- Resumed `npm run pin:cells` once more: grew to 114 pinned facilities (112 real plus the 2 spot-checks), Delta now at 23 sampled candidates (up from 8). Ran climatology, refresh, alerts, build:web-data and the M8 replay again. Updated backtest numbers: 67 sampled LGAs, 12 hits, 18 misses, 14 false alarms (slightly more false alarms than hits). docs/DATA_AUDIT.md, docs/BACKTEST.md and docs/PITCH.md all updated to these final numbers.
+- Tried the heat/cold layer two more times; both attempts hit the weather API's rate limit at the same point (chunk 2, 40 of 341 cells), no further progress this run. Discarded the resulting file (only its timestamp differed, no new data) rather than committing a no-op diff.
+- Final state for this session: `npm test` 53/53, `npm run lint` clean on pipeline and web, `npx vite build` succeeds (272.99 kB gzipped JS). Both the river pin-cells pipeline and the heat/cold pipeline are safe to rerun later without losing progress (per-point caching, cache-checked after a rate limit, not just before).
+
 ## NEEDS OWNER
 
 - Hackathon rules on open-source reuse: the flyer states none, but the owner should confirm this directly before the pitch. Not blocking build work.
