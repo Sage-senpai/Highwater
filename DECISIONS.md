@@ -11,7 +11,7 @@ Short dated entries, oldest first within each date.
 
 ## 2026-11-20 (unused dependencies removed)
 
-- Removed @turf/turf and csv-parse from package.json. Both were in docs/claude.md's suggested stack, but ended up unused: distance is a plain haversine function in pipeline/lib/grid.ts (no turf needed for a single point-to-point distance), and facility ingestion used the HDX GeoJSON resource directly (JSON.parse), not a CSV, since GRID3 v2.0's own CSV had no coordinates (see DATA_AUDIT.md). Keeping unused dependencies around contradicts "keep dependencies few and pinned."
+- Removed @turf/turf and csv-parse from package.json (also dropped the root npm audit from 9 to 8 vulnerabilities, since csv-parse carried one of them). Both were in docs/claude.md's suggested stack, but ended up unused: distance is a plain haversine function in pipeline/lib/grid.ts (no turf needed for a single point-to-point distance), and facility ingestion used the HDX GeoJSON resource directly (JSON.parse), not a CSV, since GRID3 v2.0's own CSV had no coordinates (see DATA_AUDIT.md). Keeping unused dependencies around contradicts "keep dependencies few and pinned."
 
 ## 2026-11-20 (web npm audit)
 
