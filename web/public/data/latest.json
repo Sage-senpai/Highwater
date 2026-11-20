@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T09:45:40.637Z",
+  "generated_at": "2026-11-20T09:50:06.814Z",
   "model": "GloFAS v4 via Open-Meteo",
   "floor_m3s": 100,
   "cells": {
@@ -179,6 +179,50 @@
       "p99": 23822.19,
       "max2022": 30618.64
     },
+    "5.0250,6.2250": {
+      "cell": {
+        "lat": 5.0250015,
+        "lon": 6.225006
+      },
+      "forecastMax": 6545.36,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 6545.36
+        },
+        {
+          "date": "2026-11-20",
+          "value": 6294.06
+        },
+        {
+          "date": "2026-11-21",
+          "value": 6052.41
+        },
+        {
+          "date": "2026-11-22",
+          "value": 5833.45
+        },
+        {
+          "date": "2026-11-23",
+          "value": 5648.37
+        },
+        {
+          "date": "2026-11-24",
+          "value": 5481.77
+        },
+        {
+          "date": "2026-11-25",
+          "value": 5344.64
+        }
+      ],
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3295760208741819,
+      "p50": 3916.42,
+      "p95": 19859.94,
+      "p99": 23987.34,
+      "max2022": 31044.6
+    },
     "7.5250,8.5750": {
       "cell": {
         "lat": 7.5250015,
@@ -267,6 +311,50 @@
       "p99": 75.36,
       "max2022": 105.91
     },
+    "5.1750,5.8750": {
+      "cell": {
+        "lat": 5.175003,
+        "lon": 5.8750153
+      },
+      "forecastMax": 41.56,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 41.56
+        },
+        {
+          "date": "2026-11-20",
+          "value": 40.02
+        },
+        {
+          "date": "2026-11-21",
+          "value": 38.54
+        },
+        {
+          "date": "2026-11-22",
+          "value": 37.19
+        },
+        {
+          "date": "2026-11-23",
+          "value": 35.81
+        },
+        {
+          "date": "2026-11-24",
+          "value": 34.48
+        },
+        {
+          "date": "2026-11-25",
+          "value": 33.12
+        }
+      ],
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null,
+      "p50": 29.9,
+      "p95": 67.87,
+      "p99": 87.31,
+      "max2022": 83.53
+    },
     "6.1750,6.7250": {
       "cell": {
         "lat": 6.175003,
@@ -354,6 +442,50 @@
       "p95": 19587.44,
       "p99": 23877.1,
       "max2022": 30689.22
+    },
+    "4.5750,6.5750": {
+      "cell": {
+        "lat": 4.5750046,
+        "lon": 6.575012
+      },
+      "forecastMax": 108.14,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 108.14
+        },
+        {
+          "date": "2026-11-20",
+          "value": 98.77
+        },
+        {
+          "date": "2026-11-21",
+          "value": 90.2
+        },
+        {
+          "date": "2026-11-22",
+          "value": 82.75
+        },
+        {
+          "date": "2026-11-23",
+          "value": 75.91
+        },
+        {
+          "date": "2026-11-24",
+          "value": 69.63
+        },
+        {
+          "date": "2026-11-25",
+          "value": 63.71
+        }
+      ],
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.23062978523747574,
+      "p50": 164.58,
+      "p95": 468.89,
+      "p99": 673.53,
+      "max2022": 871.97
     },
     "7.6750,8.0750": {
       "cell": {
@@ -486,6 +618,50 @@
       "p95": 16.75,
       "p99": 34.48,
       "max2022": 61.95
+    },
+    "4.9250,6.1750": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "forecastMax": 6590.74,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 6590.74
+        },
+        {
+          "date": "2026-11-20",
+          "value": 6337.7
+        },
+        {
+          "date": "2026-11-21",
+          "value": 6094.37
+        },
+        {
+          "date": "2026-11-22",
+          "value": 5873.89
+        },
+        {
+          "date": "2026-11-23",
+          "value": 5687.53
+        },
+        {
+          "date": "2026-11-24",
+          "value": 5519.78
+        },
+        {
+          "date": "2026-11-25",
+          "value": 5381.7
+        }
+      ],
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566,
+      "p50": 3952.67,
+      "p95": 19905.72,
+      "p99": 24042.63,
+      "max2022": 31116.17
     },
     "6.9250,6.6250": {
       "cell": {
@@ -1014,6 +1190,50 @@
       "p95": 2332.46,
       "p99": 3190.54,
       "max2022": 5519.78
+    },
+    "4.5250,5.9250": {
+      "cell": {
+        "lat": 4.5250015,
+        "lon": 5.925003
+      },
+      "forecastMax": 6728.77,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 6728.77
+        },
+        {
+          "date": "2026-11-20",
+          "value": 6470.43
+        },
+        {
+          "date": "2026-11-21",
+          "value": 6222
+        },
+        {
+          "date": "2026-11-22",
+          "value": 5996.91
+        },
+        {
+          "date": "2026-11-23",
+          "value": 5806.64
+        },
+        {
+          "date": "2026-11-24",
+          "value": 5635.38
+        },
+        {
+          "date": "2026-11-25",
+          "value": 5481.77
+        }
+      ],
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.3357046496358959,
+      "p50": 4026.17,
+      "p95": 20043.72,
+      "p99": 24153.6,
+      "max2022": 31259.79
     },
     "6.0750,7.1250": {
       "cell": {
@@ -1587,6 +1807,50 @@
       "p99": 45.34,
       "max2022": 51
     },
+    "4.8250,6.0750": {
+      "cell": {
+        "lat": 4.8250046,
+        "lon": 6.075012
+      },
+      "forecastMax": 6636.43,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 6636.43
+        },
+        {
+          "date": "2026-11-20",
+          "value": 6381.64
+        },
+        {
+          "date": "2026-11-21",
+          "value": 6136.62
+        },
+        {
+          "date": "2026-11-22",
+          "value": 5914.62
+        },
+        {
+          "date": "2026-11-23",
+          "value": 5726.96
+        },
+        {
+          "date": "2026-11-24",
+          "value": 5570.86
+        },
+        {
+          "date": "2026-11-25",
+          "value": 5419.01
+        }
+      ],
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.33262595587428195,
+      "p50": 3989.25,
+      "p95": 19951.63,
+      "p99": 24153.6,
+      "max2022": 31187.89
+    },
     "6.0250,6.6750": {
       "cell": {
         "lat": 6.0250015,
@@ -1630,6 +1894,50 @@
       "p95": 19497.44,
       "p99": 23869.41,
       "max2022": 30618.64
+    },
+    "4.8250,5.4750": {
+      "cell": {
+        "lat": 4.8250046,
+        "lon": 5.475006
+      },
+      "forecastMax": 53.33,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 53.33
+        },
+        {
+          "date": "2026-11-20",
+          "value": 48.43
+        },
+        {
+          "date": "2026-11-21",
+          "value": 45.56
+        },
+        {
+          "date": "2026-11-22",
+          "value": 43.26
+        },
+        {
+          "date": "2026-11-23",
+          "value": 41.17
+        },
+        {
+          "date": "2026-11-24",
+          "value": 39.18
+        },
+        {
+          "date": "2026-11-25",
+          "value": 37.11
+        }
+      ],
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null,
+      "p50": 50.52,
+      "p95": 183.08,
+      "p99": 298.92,
+      "max2022": 305.9
     },
     "7.3250,6.6750": {
       "cell": {
@@ -2070,6 +2378,50 @@
       "p95": 18966.06,
       "p99": 23387.37,
       "max2022": 30268.13
+    },
+    "6.3250,7.0750": {
+      "cell": {
+        "lat": 6.3250046,
+        "lon": 7.075012
+      },
+      "forecastMax": 23.32,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 23.32
+        },
+        {
+          "date": "2026-11-20",
+          "value": 21.86
+        },
+        {
+          "date": "2026-11-21",
+          "value": 20.53
+        },
+        {
+          "date": "2026-11-22",
+          "value": 19.23
+        },
+        {
+          "date": "2026-11-23",
+          "value": 18.01
+        },
+        {
+          "date": "2026-11-24",
+          "value": 16.82
+        },
+        {
+          "date": "2026-11-25",
+          "value": 15.63
+        }
+      ],
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null,
+      "p50": 29.69,
+      "p95": 115.41,
+      "p99": 150.01,
+      "max2022": 121.74
     },
     "7.5250,7.1250": {
       "cell": {
@@ -3215,6 +3567,50 @@
       "p99": 162.63,
       "max2022": 276.33
     },
+    "5.9250,6.9250": {
+      "cell": {
+        "lat": 5.925003,
+        "lon": 6.925003
+      },
+      "forecastMax": 3.14,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 3.14
+        },
+        {
+          "date": "2026-11-20",
+          "value": 2.74
+        },
+        {
+          "date": "2026-11-21",
+          "value": 2.4
+        },
+        {
+          "date": "2026-11-22",
+          "value": 2.09
+        },
+        {
+          "date": "2026-11-23",
+          "value": 1.81
+        },
+        {
+          "date": "2026-11-24",
+          "value": 1.55
+        },
+        {
+          "date": "2026-11-25",
+          "value": 1.32
+        }
+      ],
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null,
+      "p50": 13.39,
+      "p95": 46.21,
+      "p99": 72.53,
+      "max2022": 101.57
+    },
     "7.9250,9.1250": {
       "cell": {
         "lat": 7.925003,
@@ -4095,6 +4491,50 @@
       "p99": 23226.38,
       "max2022": 30129.07
     },
+    "5.8250,6.7250": {
+      "cell": {
+        "lat": 5.8250046,
+        "lon": 6.725006
+      },
+      "forecastMax": 6.06,
+      "forecastDaily": [
+        {
+          "date": "2026-11-19",
+          "value": 6.06
+        },
+        {
+          "date": "2026-11-20",
+          "value": 5.24
+        },
+        {
+          "date": "2026-11-21",
+          "value": 4.56
+        },
+        {
+          "date": "2026-11-22",
+          "value": 3.99
+        },
+        {
+          "date": "2026-11-23",
+          "value": 3.49
+        },
+        {
+          "date": "2026-11-24",
+          "value": 3.06
+        },
+        {
+          "date": "2026-11-25",
+          "value": 2.7
+        }
+      ],
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null,
+      "p50": 31.96,
+      "p95": 118.12,
+      "p99": 192.52,
+      "max2022": 310.17
+    },
     "5.5250,5.6750": {
       "cell": {
         "lat": 5.5250015,
@@ -4401,6 +4841,16 @@
       "lowConfidence": true,
       "ratioToP95": 0.3152475639283028
     },
+    "1049": {
+      "cell": {
+        "lat": 5.0250015,
+        "lon": 6.225006
+      },
+      "distance_km": 14.75,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3295760208741819
+    },
     "1114": {
       "cell": {
         "lat": 7.5250015,
@@ -4417,6 +4867,16 @@
         "lon": 5.725006
       },
       "distance_km": 13.53,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
+    },
+    "3550": {
+      "cell": {
+        "lat": 5.175003,
+        "lon": 5.8750153
+      },
+      "distance_km": 12.09,
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
@@ -4440,6 +4900,16 @@
       "level": "NORMAL",
       "lowConfidence": false,
       "ratioToP95": 0.3205926859252664
+    },
+    "4354": {
+      "cell": {
+        "lat": 4.5750046,
+        "lon": 6.575012
+      },
+      "distance_km": 14.41,
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.23062978523747574
     },
     "4727": {
       "cell": {
@@ -4470,6 +4940,16 @@
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
+    },
+    "7210": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 11.96,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
     },
     "7604": {
       "cell": {
@@ -4520,6 +5000,16 @@
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
+    },
+    "9070": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 10.18,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
     },
     "9288": {
       "cell": {
@@ -4601,6 +5091,16 @@
       "lowConfidence": false,
       "ratioToP95": 0.12639016317535992
     },
+    "10092": {
+      "cell": {
+        "lat": 4.5250015,
+        "lon": 5.925003
+      },
+      "distance_km": 12.25,
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.3357046496358959
+    },
     "10118": {
       "cell": {
         "lat": 5.5250015,
@@ -4620,6 +5120,16 @@
       "level": "NORMAL",
       "lowConfidence": true,
       "ratioToP95": 0.3132934374974356
+    },
+    "10795": {
+      "cell": {
+        "lat": 5.0250015,
+        "lon": 6.225006
+      },
+      "distance_km": 13.48,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3295760208741819
     },
     "11446": {
       "cell": {
@@ -4691,6 +5201,16 @@
       "lowConfidence": true,
       "ratioToP95": 0.4852373437051502
     },
+    "15910": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 12.72,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
     "17548": {
       "cell": {
         "lat": 9.675003,
@@ -4761,6 +5281,16 @@
       "lowConfidence": false,
       "ratioToP95": null
     },
+    "19246": {
+      "cell": {
+        "lat": 4.8250046,
+        "lon": 6.075012
+      },
+      "distance_km": 14.35,
+      "level": "NORMAL",
+      "lowConfidence": false,
+      "ratioToP95": 0.33262595587428195
+    },
     "19345": {
       "cell": {
         "lat": 6.0250015,
@@ -4770,6 +5300,26 @@
       "level": "NORMAL",
       "lowConfidence": true,
       "ratioToP95": 0.3140155835843065
+    },
+    "19367": {
+      "cell": {
+        "lat": 4.8250046,
+        "lon": 5.475006
+      },
+      "distance_km": 15.79,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
+    },
+    "19385": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 9.53,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
     },
     "19682": {
       "cell": {
@@ -4901,12 +5451,32 @@
       "lowConfidence": true,
       "ratioToP95": 0.3132934374974356
     },
+    "20905": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 11.6,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
     "23114": {
       "cell": {
         "lat": 6.175003,
         "lon": 7.075012
       },
       "distance_km": 14.12,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
+    },
+    "23181": {
+      "cell": {
+        "lat": 6.3250046,
+        "lon": 7.075012
+      },
+      "distance_km": 13.21,
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
@@ -4920,6 +5490,26 @@
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
+    },
+    "23277": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 9.79,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
+    "23294": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 14.61,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
     },
     "23309": {
       "cell": {
@@ -5291,6 +5881,16 @@
       "lowConfidence": false,
       "ratioToP95": null
     },
+    "31031": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 16.65,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
     "31039": {
       "cell": {
         "lat": 6.175003,
@@ -5321,12 +5921,32 @@
       "lowConfidence": false,
       "ratioToP95": null
     },
+    "32068": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 14.47,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
     "32813": {
       "cell": {
         "lat": 6.175003,
         "lon": 7.075012
       },
       "distance_km": 4.62,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
+    },
+    "34085": {
+      "cell": {
+        "lat": 5.925003,
+        "lon": 6.925003
+      },
+      "distance_km": 16.69,
       "level": "NO_SIGNAL",
       "lowConfidence": false,
       "ratioToP95": null
@@ -5531,6 +6151,26 @@
       "lowConfidence": false,
       "ratioToP95": null
     },
+    "41732": {
+      "cell": {
+        "lat": 5.0250015,
+        "lon": 6.225006
+      },
+      "distance_km": 15.08,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3295760208741819
+    },
+    "41747": {
+      "cell": {
+        "lat": 4.925003,
+        "lon": 6.175003
+      },
+      "distance_km": 11.59,
+      "level": "NORMAL",
+      "lowConfidence": true,
+      "ratioToP95": 0.3310977950056566
+    },
     "42876": {
       "cell": {
         "lat": 7.675003,
@@ -5621,6 +6261,16 @@
       "lowConfidence": true,
       "ratioToP95": 0.3132934374974356
     },
+    "44036": {
+      "cell": {
+        "lat": 6.3250046,
+        "lon": 7.075012
+      },
+      "distance_km": 18.86,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
+    },
     "44169": {
       "cell": {
         "lat": 6.0250015,
@@ -5630,6 +6280,16 @@
       "level": "NORMAL",
       "lowConfidence": true,
       "ratioToP95": 0.3140155835843065
+    },
+    "44254": {
+      "cell": {
+        "lat": 5.8250046,
+        "lon": 6.725006
+      },
+      "distance_km": 15.22,
+      "level": "NO_SIGNAL",
+      "lowConfidence": false,
+      "ratioToP95": null
     },
     "44399": {
       "cell": {
