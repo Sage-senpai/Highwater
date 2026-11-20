@@ -6,6 +6,7 @@ Every third-party dataset, API, library, or cloned repo used in this project, wi
 
 - Open-Meteo Flood API (GloFAS v4 reanalysis and forecast). https://open-meteo.com/en/docs/flood-api
   No key required for non-commercial use. Commercial use terms not checked, not needed for this MVP.
+- Open-Meteo Weather Forecast API (api.open-meteo.com/v1/forecast) and Historical Weather API (archive-api.open-meteo.com/v1/archive), used for the experimental heat/cold layer. License CC-BY 4.0, free for non-commercial use, published limits under 10,000 calls/day, 5,000/hour, 600/minute per IP and application (open-meteo.com/en/terms, checked 2026-11-20).
 - HDX "Nigeria: Flood data" (data.humdata.org/dataset/4cc05f0e-e794-4541-8e99-2073ace1f237), used for the M8 backtest. License: Creative Commons Attribution International (CC BY). Resource used: "NEMA Flood Data 06102022.xlsx" (NEMA, 2022), 840 rows across 32 states and the FCT, state/LGA/community/affected-people. Retrieved 2026-11-20. Attribution: NEMA (National Emergency Management Agency), via the Humanitarian Data Exchange.
 - HDX "Nigeria: Health facilities" (data.humdata.org/dataset/nigeria-health-facilities), GRID3-derived facility points. License: Creative Commons Attribution International (CC BY). Dataset date on HDX: 2020-10-06. Retrieved 2026-11-19. Attribution: GRID3, via the Humanitarian Data Exchange.
 
