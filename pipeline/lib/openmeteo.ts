@@ -11,7 +11,7 @@ const BASE_URL = "https://flood-api.open-meteo.com/v1/flood";
 const CACHE_DIR = "data/cache";
 const FORECAST_CHUNK_SIZE = 100; // conservative batch size, tested up to 60 coordinates in one call
 const HISTORY_CHUNK_SIZE = 10; // a 30-year daily history request is much larger per point than a 7-day forecast; 100 locations at once returned a 400 "too much data" error, so history batches are smaller
-const THROTTLE_MS = 1500; // Open-Meteo returned 429 at a faster pace in testing; no published limit was found, so this is a conservative guess, logged in DECISIONS.md
+const THROTTLE_MS = 15000; // raised from 1500ms: evidence late in this build session suggests a token-bucket-style limit that refills slowly rather than a strict once-per-hour reset (a single-point check succeeded seconds after a batch request got a 429), see DECISIONS.md
 const HISTORY_THROTTLE_MS = 4000; // history requests are much larger and tripped an hourly cap once already, see DECISIONS.md
 
 export interface FloodDailyResponse {
