@@ -13,7 +13,8 @@ import type { Point } from "./grid.js";
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 const ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive";
 const CACHE_DIR = "data/cache/weather";
-const CHUNK_SIZE = 100;
+const FORECAST_CHUNK_SIZE = 100;
+const HISTORY_CHUNK_SIZE = 20; // a 25-year daily archive request for 3 variables is much larger per point than a 7-day forecast; 100 locations at once returned a 400 "too much data" error, same issue as the flood API's history endpoint
 const THROTTLE_MS = 1000; // published limit is 600/minute, far looser than the flood API's effective limit this session
 
 export interface WeatherDailyResponse {
@@ -113,13 +114,13 @@ export async function fetchWeatherForecast(
 ): Promise<(WeatherDailyResponse | null)[]> {
   const out: (WeatherDailyResponse | null)[] = [];
   let hitLimit = false;
-  for (let i = 0; i < points.length; i += CHUNK_SIZE) {
-    const chunk = points.slice(i, i + CHUNK_SIZE);
+  for (let i = 0; i < points.length; i += FORECAST_CHUNK_SIZE) {
+    const chunk = points.slice(i, i + FORECAST_CHUNK_SIZE);
     try {
       const batch = await fetchDailyBatch(FORECAST_URL, chunk, `forecast_days=${forecastDays}`, !hitLimit);
       out.push(...batch);
     } catch (err) {
-      console.warn(`Weather forecast chunk ${i / CHUNK_SIZE} failed:`, (err as Error).message);
+      console.warn(`Weather forecast chunk ${i / FORECAST_CHUNK_SIZE} failed:`, (err as Error).message);
       hitLimit = true;
       out.push(...chunk.map(() => null));
     }
@@ -134,8 +135,8 @@ export async function fetchWeatherHistory(
 ): Promise<(WeatherDailyResponse | null)[]> {
   const out: (WeatherDailyResponse | null)[] = [];
   let hitLimit = false;
-  for (let i = 0; i < points.length; i += CHUNK_SIZE) {
-    const chunk = points.slice(i, i + CHUNK_SIZE);
+  for (let i = 0; i < points.length; i += HISTORY_CHUNK_SIZE) {
+    const chunk = points.slice(i, i + HISTORY_CHUNK_SIZE);
     try {
       const batch = await fetchDailyBatch(
         ARCHIVE_URL,
@@ -145,7 +146,7 @@ export async function fetchWeatherHistory(
       );
       out.push(...batch);
     } catch (err) {
-      console.warn(`Weather history chunk ${i / CHUNK_SIZE} failed, stopping further network requests this run:`, (err as Error).message);
+      console.warn(`Weather history chunk ${i / HISTORY_CHUNK_SIZE} failed, stopping further network requests this run:`, (err as Error).message);
       hitLimit = true;
       out.push(...chunk.map(() => null));
     }
