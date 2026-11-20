@@ -78,4 +78,36 @@ All 36 states and the FCT are present. No facility rows outside Nigeria's boundi
 
 ## River-cell coverage (M2)
 
-See the "River-cell pilot coverage" section below, added after M2 ran.
+Open-Meteo's flood API has a tight, undocumented hourly request limit (confirmed by direct testing: a
+single-point request returned `{"error":true,"reason":"Hourly API request limit exceeded. Please try
+again in the next hour."}` after roughly 40 to 50 batched requests in under an hour). This blocked the
+full M2 run more than once; see DECISIONS.md for the fallbacks (per-point caching, fail-fast on 429,
+partial-progress saving, reduced throttle). As a result, the pilot that actually got real 30-year
+climatology and a real pin is smaller than the 150 to 400 facilities the build plan asks for: 63
+facilities, from 225 sampled candidates (25 per corridor state, plus 2 spot-check points), across 4 of
+the 9 candidate corridor states. This is the honest number for this build, not the target number.
+
+Coverage by state, from `data/coverage.json` (2026-11-20), `n` is sampled candidates actually pinned with
+real history, `aboveFloor` is how many of those have a 30-year median at or above the 100 m3/s floor:
+
+| State | Sampled and pinned | At or above floor | Median distance to pinned cell (km) |
+|---|---|---|---|
+| Kogi | 25 | 11 | 14.71 |
+| Niger | 25 | 8 | 13.28 |
+| Kwara | 12 | 0 | 8.77 |
+| Nasarawa | 1 | 1 | 12.75 |
+| Benue | 0 (rate-limited before reaching this state) | - | - |
+| Delta | 0 (rate-limited before reaching this state) | - | - |
+| Anambra | 0 (rate-limited before reaching this state) | - | - |
+| Bayelsa | 0 (rate-limited before reaching this state) | - | - |
+| Jigawa | 0 (rate-limited before reaching this state) | - | - |
+
+The two spot-check points from docs/claude.md (Onitsha 6.15,6.78 and Nsukka 6.875,7.375) were queued last
+in this run's candidate order and were not reached before the quota ran out either run. Their window
+search and pinning code is written and unit-tested (pipeline/pin-cells.ts, pipeline/lib/grid.ts), but the
+specific acceptance check ("the Onitsha test point pins to a cell near 6.175, 6.725 with discharge in the
+thousands; a Nsukka facility pins to NO_SIGNAL") has not been confirmed with a real API response in this
+build. This is logged here rather than assumed to pass.
+
+Resuming `npm run pin:cells` later (whenever the hourly quota allows) will pin more facilities without
+re-spending quota on the 63 already cached, since the cache is keyed per point, not per batch.
