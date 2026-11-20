@@ -17,7 +17,8 @@ Every third-party dataset, API, library, or cloned repo used in this project, wi
 
 ## Map tiles
 
-- CARTO basemap tiles (light_all raster tiles, a.basemaps.cartocdn.com etc.), free, no key required, attribution shown in the map's attribution control at all times: "CARTO, OpenStreetMap contributors". Used instead of tile.openstreetmap.org per docs/claude.md's instruction not to use that host for a public deployment without checking its usage policy.
+- CARTO basemap tiles (light_all raster tiles, a.basemaps.cartocdn.com etc.) were tried first and recorded here as free and keyless. On 2026-11-20, the deployed site showed every tile as a fixed "API KEY REQUIRED" placeholder image (confirmed: two different tile coordinates returned byte-identical images), so CARTO's anonymous access to this endpoint is no longer usable. See DECISIONS.md.
+- Replaced with Esri's World_Light_Gray_Base raster tiles (services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base), free, no key required for this kind of light, non-commercial use. Verified live: different tile coordinates return different image bytes (not a placeholder). Attribution shown in the map's attribution control at all times: "Esri, DeLorme, NAVTEQ, OpenStreetMap contributors". Used instead of tile.openstreetmap.org per docs/claude.md's instruction not to use that host for a public deployment without checking its usage policy.
 
 ## Libraries
 

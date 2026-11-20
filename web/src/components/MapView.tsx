@@ -4,25 +4,26 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import type { Facility, FacilityStatus, Level } from "../types";
 import { buildMarkerIcon } from "../markerIcons";
 
-// Keyless tile source, public-use terms checked and logged in
-// ATTRIBUTIONS.md: CARTO's basemap tiles (free, no key, attribution
-// required, shown in the map attribution control which stays on screen).
+// Keyless tile source. CARTO's basemaps.cartocdn.com raster tiles now
+// return a fixed "API KEY REQUIRED" placeholder image for every
+// coordinate (found live on the deployed site on 2026-11-20, see
+// DECISIONS.md), so this uses Esri's public World_Light_Gray_Base
+// basemap instead, which still serves real tiles with no key. Terms
+// and attribution text logged in ATTRIBUTIONS.md.
 const STYLE: maplibregl.StyleSpecification = {
   version: 8,
   sources: {
-    carto: {
+    esriGray: {
       type: "raster",
       tiles: [
-        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
       ],
       tileSize: 256,
       attribution:
-        '&copy; <a href="https://carto.com/attributions">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   },
-  layers: [{ id: "carto", type: "raster", source: "carto" }],
+  layers: [{ id: "esriGray", type: "raster", source: "esriGray" }],
 };
 
 interface Props {
