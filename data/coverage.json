@@ -1,13 +1,13 @@
 {
   "Benue": {
-    "n": 21,
-    "aboveFloor": 4,
+    "n": 25,
+    "aboveFloor": 6,
     "medianDistanceKm": 14.93
   },
   "Delta": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
+    "n": 8,
+    "aboveFloor": 2,
+    "medianDistanceKm": 14.54
   },
   "Anambra": {
     "n": 1,
@@ -15,9 +15,9 @@
     "medianDistanceKm": 14.29
   },
   "Bayelsa": {
-    "n": 0,
-    "aboveFloor": 0,
-    "medianDistanceKm": 0
+    "n": 1,
+    "aboveFloor": 1,
+    "medianDistanceKm": 8.87
   },
   "Jigawa": {
     "n": 0,
