@@ -4,12 +4,12 @@ Written ahead of the demo. Numbers here must trace to a file in this repo or a U
 appendix A. If data/latest.json or a replay file is not yet generated when this is read, say so rather
 than inventing a number.
 
-Current real coverage (data/pins.json, data/coverage.json, 2026-11-20): 114 facilities with a real pinned
-cell and 30-year climatology, across 8 of 9 candidate states (Kogi, Niger, Benue, Delta, Kwara, Anambra,
+Current real coverage (data/pins.json, data/coverage.json, 2026-11-20): 137 facilities with a real pinned
+cell and 30-year climatology, across 8 of 9 candidate states (Kogi, Niger, Benue, Delta, Anambra, Kwara,
 Bayelsa, Nasarawa; only Jigawa still has none), not the full 150 to 400 facility pilot the build plan
 targets. Open-Meteo's undocumented, very tight hourly request limit slowed reaching this; see
-docs/DATA_AUDIT.md. A real M8 backtest now exists too (docs/BACKTEST.md): 12 hits, 18 misses, 14 false
-alarms over 67 LGAs for the 2022-10-01 week, which is an honest "finds some, misses more, false alarms
+docs/DATA_AUDIT.md. A real M8 backtest now exists too (docs/BACKTEST.md): 15 hits, 23 misses, 17 false
+alarms over 83 LGAs for the 2022-10-01 week, which is an honest "finds some, misses more, false alarms
 at least as often as hits," not a validated detector. Say both numbers plainly in the demo if asked. Do
 not say "150 to 400" or imply full coverage, and do not call the backtest result good or validated.
 

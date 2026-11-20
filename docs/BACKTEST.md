@@ -55,29 +55,30 @@ reason are logged in DECISIONS.md, separately from this file.
 ## Result
 
 Real numbers now exist, updated as pin coverage grew across this build session.
-`npm run replay -- --date 2022-10-01` ran against 114 pinned facilities across 8 of the 9 candidate
+`npm run replay -- --date 2022-10-01` ran against 137 pinned facilities across 8 of the 9 candidate
 corridor states (Kogi, Niger, Kwara, Nasarawa, Benue, Anambra, Delta, Bayelsa; only Jigawa still has 0,
 see docs/DATA_AUDIT.md for the full coverage table). `pipeline/backtest-compare.ts` compared the replay's
 WATCH-or-higher facilities against the NEMA 2022 LGA data by (state, LGA):
 
-- Sample size: 67 distinct (state, LGA) pairs with at least one pilot facility.
-- Flagged (WATCH or higher) LGAs in the replay: 26.
-- Hits (flagged and in the NEMA 2022 data): 12. Benue: Gboko, Katsina-Ala, Kwande, Logo. Delta: Burutu.
-  Kogi: Idah. Nasarawa: Toto. Niger: Borgu, Bosso, Katcha, Magama, Shiroro.
-- Misses (in the NEMA 2022 data, not flagged): 18. Benue: Ado, Apa, Makurdi, Oturkpo, Vandeikya. Delta:
-  Isoko North. Kogi: Ijumu. Kwara: Asa, Ilorin West, Kaiama, Oyun. Niger: Agwara, Gurara, Kontagora, Lavun,
-  Mariga, Mashegu, Paikoro.
-- False alarms (flagged, not in the NEMA 2022 data): 14. Bayelsa: Sagbama. Benue: Tarka. Delta: Isoko
-  South, Ndokwa West, Oshimili North, Ughelli South. Kogi: Bassa, Ibaji, Kogi, Lokoja, Ofu, Omala. Niger:
-  Edati, Gbako.
+- Sample size: 83 distinct (state, LGA) pairs with at least one pilot facility.
+- Flagged (WATCH or higher) LGAs in the replay: 32.
+- Hits (flagged and in the NEMA 2022 data): 15. Anambra: Idemili North, Idemili South, Ogbaru. Benue:
+  Gboko, Katsina-Ala, Kwande, Logo. Delta: Burutu. Kogi: Idah. Nasarawa: Toto. Niger: Borgu, Bosso,
+  Katcha, Magama, Shiroro.
+- Misses (in the NEMA 2022 data, not flagged): 23. Anambra: Anaocha, Awka South, Ayamelum, Ihiala, Orumba
+  North. Benue: Ado, Apa, Makurdi, Oturkpo, Vandeikya. Delta: Isoko North. Kogi: Ijumu. Kwara: Asa, Ilorin
+  West, Kaiama, Oyun. Niger: Agwara, Gurara, Kontagora, Lavun, Mariga, Mashegu, Paikoro.
+- False alarms (flagged, not in the NEMA 2022 data): 17. Anambra: Onitsha North, Onitsha South, Oyi.
+  Bayelsa: Sagbama. Benue: Tarka. Delta: Isoko South, Ndokwa West, Oshimili North, Ughelli South. Kogi:
+  Bassa, Ibaji, Kogi, Lokoja, Ofu, Omala. Niger: Edati, Gbako.
 
-Read plainly: of the LGAs this pilot could even check, exactly 12 of 30 (40 percent) of the ones NEMA
-reported as flooded were caught, and the flagged set has slightly more false alarms than hits (14 vs 12).
-This is a single replay window (2022-10-01 to 2022-10-07) against a 67-LGA sample from a 9-state
-candidate pool that was itself built under an API rate limit across several sessions, not a validated
-detector. Do not say this model is accurate or validated based on this number. The honest summary for the
-pitch is: it finds some real events, misses more than it catches, and false alarms are at least as common
-as hits. Reproduce with `npx tsx pipeline/backtest-compare.ts data/replay-2022-10-01.json` once
+Read plainly: of the 38 LGAs this pilot could even check that NEMA also reported on, 15 (about 39
+percent) were caught, and the flagged set has slightly more false alarms than hits (17 vs 15). This is a
+single replay window (2022-10-01 to 2022-10-07) against an 83-LGA sample from a 9-state candidate pool
+that was itself built under an API rate limit across several sessions, not a validated detector. Do not
+say this model is accurate or validated based on this number. The honest summary for the pitch is: it
+finds some real events, misses more than it catches, and false alarms are at least as common as hits.
+Reproduce with `npx tsx pipeline/backtest-compare.ts data/replay-2022-10-01.json` once
 `data/raw/nema_2022_lga.csv` exists (from `pipeline/backtest-extract.ts`, see above; gitignored, not
 committed, since it is a derived intermediate from a raw download).
 
