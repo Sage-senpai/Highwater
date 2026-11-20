@@ -8,16 +8,20 @@ import { median, dropNulls } from "./lib/stats.js";
 
 const FLOOR = 100; // m3/s, arbitrary, see docs/claude.md Alert levels. Shown in the UI.
 const SAMPLE_PER_STATE = 25; // caps API cost, see DECISIONS.md
+// Order matters under a tight rate limit: states not yet reached by an
+// earlier run (see docs/DATA_AUDIT.md) go first, so the next limited run
+// makes new progress instead of re-confirming states that already have
+// real data cached.
 const CORRIDOR_STATES = [
-  "Kogi",
-  "Niger",
-  "Kwara",
   "Benue",
-  "Nasarawa",
   "Delta",
   "Anambra",
   "Bayelsa",
   "Jigawa",
+  "Kogi",
+  "Niger",
+  "Kwara",
+  "Nasarawa",
 ];
 
 interface Facility {
@@ -43,17 +47,10 @@ async function main() {
   const facilities: Facility[] = JSON.parse(readFileSync("data/facilities.json", "utf-8"));
   const corridorFacilities = facilities.filter((f) => CORRIDOR_STATES.includes(f.state));
 
-  const candidates: Facility[] = [];
-  for (const state of CORRIDOR_STATES) {
-    const inState = corridorFacilities.filter((f) => f.state === state);
-    candidates.push(...sampleEvenly(inState, SAMPLE_PER_STATE));
-  }
-
-  console.log(`Corridor facility pool: ${corridorFacilities.length}. Sampled candidates: ${candidates.length}.`);
-
-  // Also include the two spot-check points from docs/claude.md so the
-  // acceptance check always has a facility to test against, even if
-  // sampling misses them.
+  // The two spot-check points from docs/claude.md go first, so they are
+  // the first things fetched (not the last) under a tight rate limit.
+  // Earlier runs queued them last and never reached them before the
+  // hourly quota ran out every single time; see DECISIONS.md.
   const onitsha: Facility = {
     id: "spotcheck-onitsha",
     name: "Onitsha spot-check point",
@@ -72,7 +69,14 @@ async function main() {
     lon: 7.375,
     source: "spot-check from docs/claude.md",
   };
-  candidates.push(onitsha, nsukka);
+
+  const candidates: Facility[] = [onitsha, nsukka];
+  for (const state of CORRIDOR_STATES) {
+    const inState = corridorFacilities.filter((f) => f.state === state);
+    candidates.push(...sampleEvenly(inState, SAMPLE_PER_STATE));
+  }
+
+  console.log(`Corridor facility pool: ${corridorFacilities.length}. Sampled candidates: ${candidates.length}.`);
 
   // Build the global set of unique window query points.
   const windowsByFacility = new Map<string, Point[]>();
