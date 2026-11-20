@@ -137,12 +137,16 @@ async function main() {
   const medianByCell = new Map<string, number>();
   cellsToHistoryCheck.forEach((qp, i) => {
     const r = historyResults[i];
-    if (!r) return;
+    if (!r) return; // history fetch failed or was skipped this run (rate limit); leave unset, not zero
     const values = dropNulls(r.daily.river_discharge);
     medianByCell.set(pointKey(qp), values.length > 0 ? median(values) : 0);
   });
 
   // Stage 4: pin each facility to the cell with the higher 30-year median.
+  // Facilities whose only candidate cell has no history result yet (this
+  // run was rate-limited partway through) are skipped entirely, not
+  // pinned with a fake zero median, so a future run can finish them
+  // without this run's gap being mistaken for a real NO_SIGNAL reading.
   interface Pin {
     facilityId: string;
     cell: { lat: number; lon: number };
@@ -152,13 +156,20 @@ async function main() {
     method: string;
   }
   const pins: Record<string, Pin> = {};
+  let skippedNoHistory = 0;
   for (const f of candidates) {
     const ranked = topCellsByFacility.get(f.id) ?? [];
     if (ranked.length === 0) continue;
-    let best = ranked[0];
-    let bestMedian = medianByCell.get(pointKey(best.snapped)) ?? 0;
-    for (const c of ranked.slice(1)) {
-      const m = medianByCell.get(pointKey(c.snapped)) ?? 0;
+    const withMedian = ranked
+      .map((c) => ({ c, m: medianByCell.get(pointKey(c.snapped)) }))
+      .filter((x): x is { c: typeof ranked[number]; m: number } => x.m !== undefined);
+    if (withMedian.length === 0) {
+      skippedNoHistory++;
+      continue;
+    }
+    let best = withMedian[0].c;
+    let bestMedian = withMedian[0].m;
+    for (const { c, m } of withMedian.slice(1)) {
       if (m > bestMedian) {
         best = c;
         bestMedian = m;
@@ -175,6 +186,7 @@ async function main() {
   }
 
   writeFileSync("data/pins.json", JSON.stringify(pins, null, 2));
+  console.log(`Pinned ${Object.keys(pins).length} facilities. Skipped ${skippedNoHistory} (no history result yet this run, rerun to finish them).`);
 
   // Coverage table per state.
   const coverage: Record<string, { n: number; aboveFloor: number; medianDistanceKm: number }> = {};

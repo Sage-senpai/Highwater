@@ -42,8 +42,16 @@ async function sleep(ms: number) {
 
 async function fetchWithRetry(url: string, attempt = 1): Promise<Response> {
   const res = await fetch(url);
-  if (res.status === 429 || res.status >= 500) {
-    if (attempt > 6) {
+  if (res.status === 429) {
+    // Every retry is itself a request that counts against whatever the
+    // real hourly quota is (confirmed: this quota is tight enough that
+    // even status checks between runs consumed it). Fail fast on 429
+    // instead of burning more of the quota on retries; the caller resumes
+    // later and reuses the cache for whatever already succeeded.
+    throw new Error(`Open-Meteo hourly limit hit (429) on attempt ${attempt}. Stopping without retrying.`);
+  }
+  if (res.status >= 500) {
+    if (attempt > 3) {
       throw new Error(`Open-Meteo request failed after ${attempt} attempts: ${res.status}`);
     }
     const backoffMs = 2000 * 2 ** attempt;
@@ -93,20 +101,35 @@ export async function fetchForecast(
 }
 
 // Fetches daily history for many points, in chunks, for a date range.
+// If the hourly quota runs out partway through, stops making new requests
+// but still returns whatever succeeded (and was cached) so far, padded
+// with nulls in the original point order, so a caller can save partial
+// progress instead of losing an entire run to one 429.
 export async function fetchHistory(
   points: Point[],
   startDate: string,
   endDate: string
-): Promise<FloodDailyResponse[]> {
-  const out: FloodDailyResponse[] = [];
+): Promise<(FloodDailyResponse | null)[]> {
+  const out: (FloodDailyResponse | null)[] = [];
+  let hitLimit = false;
   for (let i = 0; i < points.length; i += HISTORY_CHUNK_SIZE) {
     const chunk = points.slice(i, i + HISTORY_CHUNK_SIZE);
-    const batch = await fetchDailyBatch(
-      chunk,
-      `start_date=${startDate}&end_date=${endDate}`,
-      HISTORY_THROTTLE_MS
-    );
-    out.push(...batch);
+    if (hitLimit) {
+      out.push(...chunk.map(() => null));
+      continue;
+    }
+    try {
+      const batch = await fetchDailyBatch(
+        chunk,
+        `start_date=${startDate}&end_date=${endDate}`,
+        HISTORY_THROTTLE_MS
+      );
+      out.push(...batch);
+    } catch (err) {
+      console.warn(`History chunk ${i / HISTORY_CHUNK_SIZE} failed, stopping further history requests this run:`, (err as Error).message);
+      hitLimit = true;
+      out.push(...chunk.map(() => null));
+    }
   }
   return out;
 }
