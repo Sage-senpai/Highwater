@@ -81,3 +81,58 @@ a {
 .level-badge--WARNING { color: var(--color-warning); }
 .level-badge--SEVERE { color: var(--color-severe); }
 .level-badge--NO_SIGNAL { color: var(--color-no-signal); }
+
+/* Landing page */
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+@media (min-width: 760px) {
+  .landing-hero {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+.landing-headline {
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0 0 var(--space-3);
+  max-width: 16ch;
+}
+
+.landing-lede {
+  font-size: clamp(1rem, 0.92rem + 0.3vw, 1.15rem);
+  max-width: 54ch;
+  margin: 0 0 var(--space-4);
+}
+
+.landing-cta-row {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.landing-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-4);
+}
+
+.landing-stat-value {
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 var(--space-1);
+}
+
+.landing-stat-label {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: 0.9rem;
+}

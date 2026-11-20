@@ -7,7 +7,8 @@ import SummaryStrip from "./components/SummaryStrip";
 import FacilityPanel from "./components/FacilityPanel";
 import AlertsTab from "./components/AlertsTab";
 import ReliabilityPage from "./components/ReliabilityPage";
-import IntroPanel, { isIntroDismissed, setIntroDismissed } from "./components/IntroPanel";
+import LandingPage from "./components/LandingPage";
+import { isIntroDismissed, setIntroDismissed } from "./components/landingState";
 
 type Tab = "map" | "alerts" | "reliability";
 
@@ -53,6 +54,25 @@ export default function App() {
   const selectedCellData =
     selectedStatus && latest ? latest.cells[`${selectedStatus.cell.lat.toFixed(4)},${selectedStatus.cell.lon.toFixed(4)}`] ?? null : null;
 
+  if (showIntro) {
+    return (
+      <LandingPage
+        facilityCount={latest ? Object.keys(latest.facilities).length : 0}
+        stateCount={states.length}
+        dataDate={latest?.generated_at ?? null}
+        onEnter={() => {
+          setIntroDismissed(true);
+          setShowIntro(false);
+        }}
+        onReliability={() => {
+          setIntroDismissed(true);
+          setShowIntro(false);
+          setTab("reliability");
+        }}
+      />
+    );
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <header style={{ padding: "10px 16px", borderBottom: "1px solid var(--color-border)" }}>
@@ -61,15 +81,6 @@ export default function App() {
           River-level warning for facilities near large rivers. Not a flood forecast for a building.
         </p>
       </header>
-
-      {showIntro && (
-        <IntroPanel
-          onDismiss={() => {
-            setIntroDismissed(true);
-            setShowIntro(false);
-          }}
-        />
-      )}
 
       <nav aria-label="Main sections" style={{ display: "flex", gap: "4px", padding: "8px 16px", borderBottom: "1px solid var(--color-border)" }}>
         {(["map", "alerts", "reliability"] as Tab[]).map((t) => (
@@ -88,21 +99,19 @@ export default function App() {
             {t === "map" ? "Map" : t === "alerts" ? "Alerts" : "How reliable is this"}
           </button>
         ))}
-        {!showIntro && (
-          <button
-            onClick={() => setShowIntro(true)}
-            style={{
-              padding: "6px 12px",
-              background: "transparent",
-              color: "var(--color-ink-muted)",
-              border: "1px solid var(--color-border)",
-              borderRadius: "4px",
-              marginLeft: "auto",
-            }}
-          >
-            About
-          </button>
-        )}
+        <button
+          onClick={() => setShowIntro(true)}
+          style={{
+            padding: "6px 12px",
+            background: "transparent",
+            color: "var(--color-ink-muted)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "4px",
+            marginLeft: "auto",
+          }}
+        >
+          About
+        </button>
       </nav>
 
       {tab === "map" && (

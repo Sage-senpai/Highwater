@@ -153,7 +153,53 @@ export default function MapView({ facilities, statusById, onSelect }: Props) {
     updateSource(map, facilities, statusById);
   }, [facilities, statusById]);
 
+  // Re-fit the view to whichever facilities are currently loaded (a state
+  // switch), instead of leaving the map on its initial country-wide view,
+  // which is what made the map look empty: most of the frame was ocean
+  // and neighbouring countries with nothing plotted on it.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || facilities.length === 0) return;
+    const fit = () => fitToFacilities(map, facilities);
+    if (map.isStyleLoaded()) fit();
+    else map.once("load", fit);
+  }, [facilities]);
+
   return <div ref={containerRef} style={{ position: "absolute", inset: 0 }} aria-label="Facility map" role="region" />;
+}
+
+function fitToFacilities(map: MLMap, facilities: Facility[]) {
+  let minLat = Infinity;
+  let maxLat = -Infinity;
+  let minLon = Infinity;
+  let maxLon = -Infinity;
+  for (const f of facilities) {
+    minLat = Math.min(minLat, f.lat);
+    maxLat = Math.max(maxLat, f.lat);
+    minLon = Math.min(minLon, f.lon);
+    maxLon = Math.max(maxLon, f.lon);
+  }
+  // A single facility (or several at the same point) gives a zero-size
+  // bounding box, which fitBounds would zoom in on sharply. Pad it out to
+  // a sane minimum instead.
+  const minSpan = 0.15;
+  if (maxLat - minLat < minSpan) {
+    const mid = (maxLat + minLat) / 2;
+    minLat = mid - minSpan / 2;
+    maxLat = mid + minSpan / 2;
+  }
+  if (maxLon - minLon < minSpan) {
+    const mid = (maxLon + minLon) / 2;
+    minLon = mid - minSpan / 2;
+    maxLon = mid + minSpan / 2;
+  }
+  map.fitBounds(
+    [
+      [minLon, minLat],
+      [maxLon, maxLat],
+    ],
+    { padding: 48, maxZoom: 10, duration: 400 }
+  );
 }
 
 function updateSource(map: MLMap, facilities: Facility[], statusById: Record<string, FacilityStatus>) {
