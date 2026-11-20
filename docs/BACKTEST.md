@@ -54,9 +54,16 @@ reason are logged in DECISIONS.md, separately from this file.
 
 ## Result
 
-Pending. Needs `data/replay-<date>.json` for a 2022 window, which needs `data/pins.json` and
-`data/cells.json`, which are blocked on the Open-Meteo hourly request limit as of 2026-11-20 00:20.
-See PROGRESS.md for the resumed run and its outcome.
+Still pending for real. `data/pins.json` and `data/cells.json` now exist with real data for 63
+facilities across 4 states (Kogi, Niger, Kwara, Nasarawa), see docs/DATA_AUDIT.md. But every attempt to
+run `npm run replay -- --date 2022-10-01` for the 2022 window was itself blocked by the same Open-Meteo
+hourly limit (confirmed: the script now fails loudly and refuses to write a file when 0 of the pinned
+cells get data, rather than writing a misleading empty-but-successful-looking replay, see
+pipeline/replay.ts and DECISIONS.md). Benue, Delta, Anambra, Bayelsa and Jigawa, which carry the heavier
+NEMA 2022 LGA counts in the table above, were not reached by the pinning run at all before the quota ran
+out, so even a successful replay today would only cover Kogi, Niger, Kwara and Nasarawa's small sample.
+No hit/miss/false-alarm numbers exist yet. This is the honest state of this milestone, not a result to
+round up.
 
 ## Honest caveats regardless of the result
 
