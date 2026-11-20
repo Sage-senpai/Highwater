@@ -88,7 +88,8 @@ function pointCachePath(p: Point, extraParams: string): string {
 async function fetchDailyBatch(
   points: Point[],
   extraParams: string,
-  throttleMs = THROTTLE_MS
+  throttleMs = THROTTLE_MS,
+  allowNetwork = true
 ): Promise<(FloodDailyResponse | null)[]> {
   const results: (FloodDailyResponse | null)[] = new Array(points.length).fill(null);
   const toFetch: { point: Point; index: number }[] = [];
@@ -102,7 +103,11 @@ async function fetchDailyBatch(
     }
   });
 
-  if (toFetch.length === 0) return results;
+  // Once a run has hit the rate limit, the caller stops allowing new
+  // network calls, but cached points above were still filled in from
+  // disk, so this chunk is not wasted even if some points in it are not
+  // cached. Only the uncached remainder is skipped.
+  if (toFetch.length === 0 || !allowNetwork) return results;
 
   const lat = toFetch.map((t) => t.point.lat).join(",");
   const lon = toFetch.map((t) => t.point.lon).join(",");
@@ -124,9 +129,14 @@ async function fetchDailyBatch(
 
 // Fetches a short forecast (default 7 days) for many points, in chunks.
 // Same partial-progress behavior as fetchHistory: a failure (rate limit or
-// network) stops further new requests for the rest of this call but still
-// returns whatever succeeded, padded with nulls, rather than throwing away
-// an entire run over one failed chunk.
+// network) stops further new NETWORK requests for the rest of this call,
+// but every remaining chunk is still checked against the on-disk cache
+// (fetchDailyBatch with allowNetwork=false), so already-fetched points
+// are never dropped just because they come after a failed chunk in the
+// iteration order. This was a real bug: an earlier version skipped whole
+// remaining chunks outright once the limit was hit, which silently lost
+// previously-cached cells on a rerun whenever the candidate order changed
+// (e.g. after reprioritizing unreached states), see DECISIONS.md.
 export async function fetchForecast(
   points: Point[],
   forecastDays = 7
@@ -135,15 +145,11 @@ export async function fetchForecast(
   let hitLimit = false;
   for (let i = 0; i < points.length; i += FORECAST_CHUNK_SIZE) {
     const chunk = points.slice(i, i + FORECAST_CHUNK_SIZE);
-    if (hitLimit) {
-      out.push(...chunk.map(() => null));
-      continue;
-    }
     try {
-      const batch = await fetchDailyBatch(chunk, `forecast_days=${forecastDays}`);
+      const batch = await fetchDailyBatch(chunk, `forecast_days=${forecastDays}`, THROTTLE_MS, !hitLimit);
       out.push(...batch);
     } catch (err) {
-      console.warn(`Forecast chunk ${i / FORECAST_CHUNK_SIZE} failed, stopping further forecast requests this run:`, (err as Error).message);
+      console.warn(`Forecast chunk ${i / FORECAST_CHUNK_SIZE} failed, stopping further forecast network requests this run:`, (err as Error).message);
       hitLimit = true;
       out.push(...chunk.map(() => null));
     }
@@ -152,10 +158,10 @@ export async function fetchForecast(
 }
 
 // Fetches daily history for many points, in chunks, for a date range.
-// If the hourly quota runs out partway through, stops making new requests
-// but still returns whatever succeeded (and was cached) so far, padded
-// with nulls in the original point order, so a caller can save partial
-// progress instead of losing an entire run to one 429.
+// If the hourly quota runs out partway through, stops making new NETWORK
+// requests but keeps checking the cache for every remaining chunk, so
+// already-fetched cells are never dropped (see the comment on
+// fetchForecast above for why this matters).
 export async function fetchHistory(
   points: Point[],
   startDate: string,
@@ -165,19 +171,16 @@ export async function fetchHistory(
   let hitLimit = false;
   for (let i = 0; i < points.length; i += HISTORY_CHUNK_SIZE) {
     const chunk = points.slice(i, i + HISTORY_CHUNK_SIZE);
-    if (hitLimit) {
-      out.push(...chunk.map(() => null));
-      continue;
-    }
     try {
       const batch = await fetchDailyBatch(
         chunk,
         `start_date=${startDate}&end_date=${endDate}`,
-        HISTORY_THROTTLE_MS
+        HISTORY_THROTTLE_MS,
+        !hitLimit
       );
       out.push(...batch);
     } catch (err) {
-      console.warn(`History chunk ${i / HISTORY_CHUNK_SIZE} failed, stopping further history requests this run:`, (err as Error).message);
+      console.warn(`History chunk ${i / HISTORY_CHUNK_SIZE} failed, stopping further history network requests this run:`, (err as Error).message);
       hitLimit = true;
       out.push(...chunk.map(() => null));
     }

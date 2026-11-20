@@ -1,7 +1,7 @@
 // M2: pin a river cell to each pilot facility.
 // See docs/claude.md "Alert levels" for why the cell is pinned once, by
 // 30-year median, and never re-picked by today's forecast.
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { windowCandidates, pointKey, distanceKm, type Point } from "./lib/grid.js";
 import { fetchForecast, fetchHistory, meanOf } from "./lib/openmeteo.js";
 import { median, dropNulls } from "./lib/stats.js";
@@ -159,7 +159,19 @@ async function main() {
     above_floor: boolean;
     method: string;
   }
-  const pins: Record<string, Pin> = {};
+  // Start from whatever was already pinned in a previous run and layer
+  // this run's results on top, rather than overwriting data/pins.json
+  // from scratch. This was a real bug: with the fetch helpers' old
+  // skip-all-after-limit behavior, a rerun under a changed candidate
+  // order could finish fewer facilities than a previous run and silently
+  // lose them, since the file was always rewritten from this run's
+  // result alone. Now fixed in both places (see DECISIONS.md), but
+  // merging here too since there is no reason a successful earlier pin
+  // should ever disappear just because this run didn't recompute it.
+  const existingPins: Record<string, Pin> = existsSync("data/pins.json")
+    ? JSON.parse(readFileSync("data/pins.json", "utf-8"))
+    : {};
+  const pins: Record<string, Pin> = { ...existingPins };
   let skippedNoHistory = 0;
   for (const f of candidates) {
     const ranked = topCellsByFacility.get(f.id) ?? [];
