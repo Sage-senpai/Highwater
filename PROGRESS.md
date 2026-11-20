@@ -16,6 +16,11 @@ Newest entry first.
 - M9 Deploy, docs, pitch: PARTIAL. README, docs/PITCH.md, .github/workflows/refresh.yml, vercel.json are all written, and PITCH.md's coverage claim was corrected to match the real number. NOT DONE: the actual Vercel deploy (needs `vercel login`, a NEEDS OWNER item) and a final README/PITCH pass once more real coverage exists.
 - M10: not started, correctly, since M9 is not fully done.
 
+## 2026-11-20 (decision to stop further live API calls this session)
+
+- After the rate limit cleared and was hit again on the very first new request of the next attempt, decided to stop making further live Open-Meteo calls for the rest of this build session (see DECISIONS.md for the reasoning: the available quota right now appears too small to make further progress worth the time, possibly an escalating soft-ban from this session's many earlier 429s). The real dataset this build ships with is final at 63 facilities, real climatology and today's forecast, across 4 of 9 corridor states (Kogi, Niger, Kwara, Nasarawa). `npm run pin:cells` will resume exactly where this session left off whenever the owner runs it again, since the cache is per-point and persists on disk.
+- Added NEEDS OWNER item below: resume `npm run pin:cells`, `npm run climatology`, `npm run refresh`, `npm run alerts`, `npm run build:web-data`, and a real `npm run replay -- --date <2022 window>` once the Open-Meteo quota has had longer to recover (a different network or a longer wait than this session had time for may help), to reach the full 150-400 facility pilot and get real M8 backtest numbers.
+
 ## NEEDS OWNER
 
 - Hackathon rules on open-source reuse: the flyer states none, but the owner should confirm this directly before the pitch. Not blocking build work.
