@@ -16,7 +16,8 @@
     "refresh": "tsx pipeline/refresh.ts",
     "replay": "tsx pipeline/replay.ts",
     "alerts": "tsx pipeline/alerts.ts",
-    "build:web-data": "tsx pipeline/build-web-data.ts"
+    "build:web-data": "tsx pipeline/build-web-data.ts",
+    "heat-cold": "tsx pipeline/heat-cold.ts"
   },
   "dependencies": {
     "fast-xml-parser": "4.5.3"
